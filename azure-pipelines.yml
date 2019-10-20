@@ -18,6 +18,9 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'install eslint --save-dev'
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
