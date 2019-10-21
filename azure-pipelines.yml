@@ -29,7 +29,7 @@ steps:
     workingDirectory: 'tin-drink'
 - task: CmdLine@2
   inputs:
-    script: 'eslint src\App.js -o tst.json -f json'
+    script: 'eslint src/App.js -o tst.json -f json'
 - task: CmdLine@2
   inputs:
     script: 'dir'
