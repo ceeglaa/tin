@@ -30,7 +30,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'sudo eslint src/App.js -o tst.json -f json || true'
+    script: 'sudo eslint src/*.js -o tst.json -f json || true'
     workingDirectory: 'tin-drink'
 - task: CmdLine@2
   inputs:
