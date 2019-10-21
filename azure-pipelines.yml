@@ -11,6 +11,10 @@ pool:
 
 steps:
 
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
+
 - task: Npm@1
   inputs:
     command: 'install'
@@ -18,8 +22,6 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'npm i -g eslint'
-- script: dir
-  displayName: 'Run a one-line script
 - task: Npm@1
   inputs:
     command: 'custom'
