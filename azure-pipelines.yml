@@ -23,4 +23,4 @@ steps:
   inputs:
     command: 'custom'
     workingDir: 'tin-drink'
-    customCommand: 'npm install -g eslint'
+    customCommand: 'install -g eslint'
