@@ -10,23 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-
 - task: CmdLine@2
   inputs:
     script: 'dir'
-
-- task: Npm@1
-  inputs:
-    command: 'install'
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'npm i -g eslint'
-- task: CmdLine@2
-  inputs:
-    script: 'dir'
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
