@@ -19,8 +19,6 @@ steps:
   inputs:
     command: 'install'
     workingDir: 'tin-drink'
-- task: Npm@1
+- task: CmdLine@2
   inputs:
-    command: 'custom'
-    workingDir: 'tin-drink'
-    customCommand: 'install -g eslint'
+    script: 'sudo npm install -g eslint'
