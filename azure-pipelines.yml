@@ -28,14 +28,9 @@ steps:
     script: 'sudo npm install eslint-plugin-import@latest --save-dev'
     workingDirectory: 'tin-drink'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    workingDir: 'tin-drink'
-    customCommand: 'init eslint src/App.js'
 - task: CmdLine@2
   inputs:
-    script: 'eslint src/App.js -o tst.json -f json'
+    script: 'sudo eslint src/App.js -o tst.json -f json'
     workingDirectory: 'tin-drink'
 - task: CmdLine@2
   inputs:
