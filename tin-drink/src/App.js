@@ -2,6 +2,12 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function xsh_djnui(){
+  s =  3245;
+
+  w = s + z;
+}
+
 function App() {
   return (
     <div className="App">
