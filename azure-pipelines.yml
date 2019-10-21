@@ -18,12 +18,12 @@ steps:
   inputs:
     command: 'custom'
     customCommand: 'npm i -g eslint'
+
 - task: Npm@1
-    inputs:
+  inputs:
     command: 'custom'
     workingDir: '/tin-drink/'
     customCommand: 'eslint /src/*.js'
-
 - task: CmdLine@2
   inputs:
     script: 'dir'
