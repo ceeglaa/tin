@@ -22,10 +22,12 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'sudo npm install -g eslint'
-
+    workingDirectory: 'tin-drink'
 - task: CmdLine@2
   inputs:
     script: 'sudo npm install eslint-plugin-import@latest --save-dev'
+    workingDirectory: 'tin-drink'
 - task: CmdLine@2
   inputs:
-    script: 'sudo eslint tin-drink/src/App.js'
+    script: 'sudo eslint src/App.js'
+    workingDirectory: 'tin-drink'
