@@ -17,7 +17,13 @@ steps:
 - task: Npm@1
   inputs:
     command: 'custom'
-    customCommand: 'install eslint --save-dev'
+    customCommand: 'npm i -g eslint'
+- task: Npm@1
+    inputs:
+    command: 'custom'
+    workingDir: '/tin-drink/'
+    customCommand: 'eslint /src/*.js'
+
 - task: CmdLine@2
   inputs:
     script: 'dir'
