@@ -33,3 +33,9 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'dir'
+    
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'tin-drink'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
