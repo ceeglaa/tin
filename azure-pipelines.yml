@@ -32,9 +32,6 @@ steps:
   inputs:
     script: 'sudo eslint src/*.js -o tst.json -f json || true'
     workingDirectory: 'tin-drink'
-- task: CmdLine@2
-  inputs:
-    script: 'dir /s'
     
 - task: PublishBuildArtifacts@1
   inputs:
