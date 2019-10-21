@@ -38,6 +38,6 @@ steps:
     
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'tin-drink'
+    PathtoPublish: 'tin-drink/tst.json'
     ArtifactName: 'drop'
     publishLocation: 'Container'
