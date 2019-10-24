@@ -20,7 +20,7 @@ steps:
   displayName: 'Run git diff changes'
   inputs:
     filename: echo
-    arguments: '$(SYSTEM_PULLREQUEST_PULLREQUESTID)'
+    arguments: '$(Build.BuildId)'
 
 - task: Bash@3
   inputs:
