@@ -8,6 +8,10 @@ function xsh_djnui(){
   w = s + z;
 }
 
+fucntion tst(){
+var z = 'tes'
+}
+
 function App() {
   return (
     <div className="App">
