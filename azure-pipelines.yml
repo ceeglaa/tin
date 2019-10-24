@@ -15,6 +15,10 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'dir'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'sudo printenv'
 - task: Npm@1
   inputs:
     command: 'install'
