@@ -8,7 +8,11 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+  
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'printenv'
 steps:
 - script: echo Hello, word!
   displayName: 'Run a one-line script'
