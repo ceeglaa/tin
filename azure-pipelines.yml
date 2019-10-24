@@ -15,9 +15,13 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'dir'
-- task: CmdLine@2
+
+- task: CmdLine@1
+  displayName: 'Run git diff changes'
   inputs:
-    script: 'echo %system.definitionId%'
+    filename: echo
+    arguments: '%system.definitionId%'
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
