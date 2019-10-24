@@ -15,6 +15,9 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'dir'
+- task: CmdLine@2
+  inputs:
+    script: 'echo %system.definitionId%'
 - task: Bash@3
   inputs:
     targetType: 'inline'
