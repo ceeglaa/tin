@@ -20,7 +20,7 @@ steps:
   displayName: 'Run git diff changes'
   inputs:
     filename: echo
-    arguments: '$(System.PullRequest.PullRequestId)'
+    arguments: '$(System.SourcesDirectory)'
 
 - task: Bash@3
   inputs:
