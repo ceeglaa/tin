@@ -20,7 +20,7 @@ steps:
   displayName: 'Run git diff changes'
   inputs:
     filename: echo
-    arguments: '$(TRAVIS_PULL_REQUEST)'
+    arguments: '$(SYSTEM_PULLREQUEST_PULLREQUESTID)'
 
 - task: Bash@3
   inputs:
