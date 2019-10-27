@@ -4,7 +4,7 @@ param (
 #Could not create SSL/TLS secure channel fix
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 
-$Token = 'ceeglaa:b86e5cd94d89a8db758a2a6c6fc717763036b63b'
+$Token = 'ceeglaa:c3ca8a4e281dee46f784365245092f8c6cdbb95f'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
     Authorization = 'Basic  {0}' -f $Base64Token;
@@ -17,8 +17,8 @@ $pullRequests = Invoke-RestMethod -Headers $Headers -Uri $UriCommit -Method GET
 $openpr = $pullRequests | where { $_.base.ref -eq "develop" -and $_.state -eq "open"} 
 $pullRequestId = $openpr.number
 
-#Create folder for comments
-if (!(Test-Path -path "eslintComments")) {New-Item "eslintComments" -Type Directory}
+#Create folder
+if (!(Test-Path -path "tin-drink/onlyChanges/$path")) {New-Item "tin-drink/onlyChanges/$path" -Type Directory}
 
 #Getting files changed in pull request save them into .txt file
 
