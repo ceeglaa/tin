@@ -23,8 +23,7 @@ steps:
     arguments: '$(Build.SourceVersion)'
 - task: PowerShell@2
   inputs:
-    filePath: 'prepareFiles.ps1'
-    arguments: 'commitId Build.SourceVersion'
+    filePath: 'teste.ps1'
 
 - task: PowerShell@2
   inputs:
