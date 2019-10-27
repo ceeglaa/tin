@@ -25,5 +25,3 @@ $newBody = @{
 $newToekUrl = "https://api.github.com/authorizations"
 $UriCommit = "https://api.github.com/zen"
 Invoke-WebRequest -Uri $newToekUrl -Body $newBody -Headers $Headers -UseBasicParsing
-Invoke-WebRequest -Uri $newToekUrl -Body $newBody -Headers $Headers2 -UseBasicParsing
-#Invoke-WebRequest -Uri $UriCommit -Method GET -UseBasicParsing
