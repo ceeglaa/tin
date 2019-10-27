@@ -1,54 +1,61 @@
 
 fs = require('fs');
-const data = fs.readFileSync('tst.json', 'utf8');
+const data = fs.readFileSync('eslint.json', 'utf8');
+const myArgs = process.argv.slice(2);
+commitId = myArgs[0]
 
 function main(){
-    let com = {
-        path: "tin-drink/src/App.test.js",
-        commit_id: "8c0ef5ca8a8650eaffe46c0adc15ad694c34de31",
-        line: 5,
-        side: "LEFT",
-        body: "KURWAS MACKJDNIPREN!!!!"
-    }
-    //console.log(JSON.stringify(com));
-    // fs.writeFile('test.json', JSON.stringify(com), 'utf-8', (err) => {
-    //     if (err) {
-    //         throw err;
-    //     } else {
-    //         console.log('The file has been saved!');
-    //     }
-    // });
-    prepareCommentFiles(data);
+    prepareComment(data);
 }
 
-function prepareCommentFiles(content) {
-    var parseContent = JSON.parse(content);
-
-    parseContent.forEach(function (file, fisrtIndex) {
-        var allPath = file.filePath;
-        var comPath = allPath.split('/work/1/s/');
-       console.log(Array.isArray(file.messages));
-       file.messages.forEach(function(message, secondIndex) {
-            console.log(message);
-            console.log(comPath);
-            console.log(fisrtIndex);
-            console.log(secondIndex);
-            let com = {
-                path: comPath[1],
-                commit_id: "8c0ef5ca8a8650eaffe46c0adc15ad694c34de31",
-                line: message.line,
-                side: "LEFT",
-                body: message.message
-            };
-            fs.writeFile('jslintcomments/file' + fisrtIndex + 'message' + secondIndex + 'jslint.json', JSON.stringify(com), 'utf-8', (err) => {
-                if (err) {
-                     throw err;
-                } else {
-                     console.log('The file has been saved!');
-                }
-            });
-       });
+function createComments(comPath, comCommitId, comLine, comBody, fileName) {
+    console.log("IN FUNCTION -->>"  + comLine );
+    let com = {
+        path: comPath,
+        commit_id: comCommitId,
+        line: comLine,
+        side: "RIGHT",
+        body: comBody
+    };
+    fs.writeFile('eslintComments/file' + fileName + 'jslint.json', JSON.stringify(com), (err) => {
+        if (err) {
+            throw err;
+        } else {
+            console.log('The file has been saved!');
+        }
     });
 }
 
+function prepareComment(content) {
+    var parseContent = JSON.parse(content);
+    var mapLines = new Map();
+    parseContent.forEach(function (file, fisrtIndex) {
+        var comPath = file.filePath.split('\\changedFiles\\')[1];
+        file.messages.forEach(function(message, secondIndex) {
+            let keyMapProp = {
+                file: comPath,
+                line: message.line
+            };
+            let keyMap = JSON.stringify(keyMapProp);
+            if (mapLines.has(keyMap)) {
+                mapLines.get(keyMap).push(message.message);
+            } else {
+                var commentsArr = Array(message.message);
+                mapLines.set(keyMap, commentsArr);
+            }
+       });
+    });
+
+    var i = 0;
+    mapLines.forEach((v, k, m) => {
+        var finalComments = '';
+        v.forEach((comment, index) =>{
+            finalComments += comment + '\n';
+        });
+        key = (JSON.parse(k));
+        createComments(key.file, commitId, key.line, finalComments, i + 'message' + key.line);
+        i++;
+    });
+
+}
 main();
