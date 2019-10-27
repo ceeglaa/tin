@@ -17,6 +17,9 @@ $pullRequests = Invoke-RestMethod -Headers $Headers -Uri $UriCommit -Method GET
 $openpr = $pullRequests | where { $_.base.ref -eq "develop" -and $_.state -eq "open"} 
 $pullRequestId = $openpr.number
 
+Write-Host $pullRequestId
+Write-Host $commitId
+
 #Create folder
 if (!(Test-Path -path "tin-drink/onlyChanges/$path")) {New-Item "tin-drink/onlyChanges/$path" -Type Directory}
 
