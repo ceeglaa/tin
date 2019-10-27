@@ -26,7 +26,7 @@ if (!(Test-Path -path "tin-drink/onlyChanges/$path")) {New-Item "tin-drink/onlyC
 #Getting files changed in pull request save them into .txt file
 
 $UriPullRequest = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/files"
-$changedFiles = Invoke-RestMethod -Headers $Headers -Uri $UriPullRequest
+$changedFiles = Invoke-RestMethod -Headers $Headers -Uri $UriPullRequest -Method GET
 Invoke-RestMethod -Headers $Headers -Uri $UriPullRequest
 
 $changedFiles | foreach {
