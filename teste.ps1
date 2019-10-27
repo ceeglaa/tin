@@ -6,4 +6,4 @@ $Headers = @{
 };
 $UriCommit = "https://api.github.com/zen"
 $urix = "https://api.github.com/ceeglaa/repo"
-Invoke-RestMethod -Headers $Headers" -Uri $urix -Method GET
+Invoke-RestMethod -Headers $Headers -Uri $urix -Method GET
