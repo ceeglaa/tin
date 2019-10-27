@@ -1,9 +1,8 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
-$Token = 'ceeglaa:a69a23495083163b47ebedfe6e5f0b907eb7fc12'
+$Token = 'ceeglaa:d72edc892d8f0e74103b0e42dc221d9107d046e9'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
     Authorization = 'Basic  {0}' -f $Base64Token; 
-    User-Agent =  'ceeglaa'
 };
 $UriCommit = "https://api.github.com/zen"
 $urix = "https://api.github.com/ceeglaa/repo"
