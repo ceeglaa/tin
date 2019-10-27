@@ -2,7 +2,7 @@ param (
     [string]$commitId = ""
 )
 #Could not create SSL/TLS secure channel fix
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
+#[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 
 $Token = 'ceeglaa:6fd6953ff130eac29343b84a56c69d7c22326769'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
