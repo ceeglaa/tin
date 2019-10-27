@@ -11,7 +11,7 @@ $Headers = @{
     Accept = "application/vnd.github.groot-preview+json"
 };
 
-#Getting Pull request with commit_id
+#Getting Pull request with  commit_id 
 $UriCommit = "https://api.github.com/repos/ceeglaa/tin/commits/$commitId/pulls"
 $pullRequests = Invoke-RestMethod -Headers $Headers -Uri $UriCommit -Method GET
 $openpr = $pullRequests | where { $_.base.ref -eq "develop" -and $_.state -eq "open"} 
