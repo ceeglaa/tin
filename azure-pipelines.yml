@@ -24,10 +24,10 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'teste.ps1'
-
 - task: PowerShell@2
   inputs:
-    filePath: 'prepareFiles.ps1 -commitId $(Build.SourceVersion)'
+    filePath: 'prepareFiles.ps1'
+    arguments: '-commitId $(Build.SourceVersion)'
     
 - task: Bash@3
   inputs:
