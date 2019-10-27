@@ -4,7 +4,7 @@ param (
 #Could not create SSL/TLS secure channel fix
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 
-$Token = 'ceeglaa:c3ca8a4e281dee46f784365245092f8c6cdbb95f'
+$Token = 'ceeglaa:6fd6953ff130eac29343b84a56c69d7c22326769'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
     Authorization = 'Basic  {0}' -f $Base64Token;
