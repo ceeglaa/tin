@@ -21,11 +21,10 @@ steps:
   inputs:
     filename: echo
     arguments: '$(Build.SourceVersion)'
-
 - task: PowerShell@2
   inputs:
     filePath: 'prepareFiles.ps1'
-    arguments: '-commitId 96011e0e59643449414594e4ed48b74d8db94375'
+    arguments: 'commitId Build.SourceVersion'
 
 - task: PowerShell@2
   inputs:
