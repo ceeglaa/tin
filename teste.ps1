@@ -5,6 +5,6 @@ $Headers = @{
     Authorization = 'Basic  {0}' -f $Base64Token
 };
 $UriCommit = "https://api.github.com/zen"
-curl -i -H "Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4" \
+$urix = " https://api.github.com/ceeglaa/repo"
 Invoke-RestMethod Invoke-RestMethod -Uri $UriCommi -Method GET
-Invoke-RestMethod Invoke-RestMethod -Headers $Headers -Uri https://api.github.com/ceeglaa/repos -Method GET
+Invoke-RestMethod Invoke-RestMethod -Headers $Headers -Uri $urix -Method GET
