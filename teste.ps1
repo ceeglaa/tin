@@ -22,6 +22,6 @@ $newToekUrl = "https://api.github.com/authorizations"
 $UriCommit = "https://api.github.com/zen"
 $urix = "https://api.github.com/ceeglaa/repo"
 #curl -i -u your_username -d '{"scopes": ["tin", "ceeglaa"], "note": "getting-started"}' https://api.github.com/authorizations
-Invoke-WebRequest -Uri $newToekUrl -Body $newBody -Headers $Headers2
-Invoke-WebRequest -Uri $UriCommit -Method GET
+Invoke-WebRequest -Uri $newToekUrl -Body $newBody -Headers $Headers2 -UseBasicParsing
+Invoke-WebRequest -Uri $UriCommit -Method GET -UseBasicParsing
 #Invoke-WebRequest -Headers $Headers2 -Uri $urix -Method GET
