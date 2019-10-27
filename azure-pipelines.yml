@@ -20,7 +20,7 @@ steps:
   displayName: 'Run git diff changes'
   inputs:
     filename: echo
-    arguments: '$(Build.SourceVersion)'
+    arguments: '$(System.PullRequest.PullRequestId)'
 - task: PowerShell@2
   inputs:
     filePath: 'teste.ps1'
