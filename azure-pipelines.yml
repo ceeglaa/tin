@@ -27,8 +27,7 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: 'sudo .\prepareFiles.ps1 -commitId "96011e0e59643449414594e4ed48b74d8db94375"'
+    filePath: '.\prepareFiles.ps1 -commitId $(Build.SourceVersion)'
     
 - task: Bash@3
   inputs:
