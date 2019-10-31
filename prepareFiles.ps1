@@ -1,6 +1,7 @@
 param (
-    [string]$commitId = ""
+    [string]$pullRequestId = ""
 )
+
 #Could not create SSL/TLS secure channel fix 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 
@@ -11,19 +12,8 @@ $Headers = @{
     Accept = "application/vnd.github.groot-preview+json"
 };
 
-#Getting Pull request  with  commit_id 
-$UriCommit = "https://api.github.com/repos/ceeglaa/tin/commits/$commitId/pulls"
-$pullRequests = Invoke-RestMethod -Headers $Headers -Uri $UriCommit -Method GET
-$openpr = $pullRequests | where { $_.base.ref -eq "develop" -and $_.state -eq "open"} 
-$pullRequestId = $openpr.number
 
-Write-Host $pullRequestId
-Write-Host $commitId
-
-#Create folder
-if (!(Test-Path -path "tin-drink/onlyChanges/$path")) {New-Item "tin-drink/onlyChanges/$path" -Type Directory}
-
-#Getting files changed in pull request save them into .txt file
+#Getting files changed in pull request copy them to the tin-drin/changedFiles file
 
 $UriPullRequest = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/files"
 $changedFiles = Invoke-RestMethod -Headers $Headers -Uri $UriPullRequest -Method GET
@@ -42,3 +32,9 @@ $changedFiles | foreach {
         $_.patch >> "tin-drink/onlyChanges/$file"
     }
 }
+
+#get last commit of current pull reguest 
+$uriCommits = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/commits"
+$changedFiles = Invoke-RestMethod -Headers $Headers -Uri $uriCommits -Method GET
+Write-Host ++
+Write-Host $changedFiles
