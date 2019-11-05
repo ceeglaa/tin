@@ -45,7 +45,10 @@ steps:
   inputs:
     script: 'dir /S'
     workingDirectory: 'tin-drink'
-
+- task: CmdLine@2
+  inputs:
+    script: 'eslint src/**'
+    workingDirectory: 'tin-drink'
 - task: CmdLine@2
   inputs:
     script: 'eslint .\changedFiles\**\*.js -o ..\eslint.json -f json'
