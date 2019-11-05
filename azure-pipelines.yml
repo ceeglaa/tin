@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -9,7 +10,13 @@ trigger:
 pool:
   vmImage: 'vs2015-win2012r2'
 
+
 steps:
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'tin-drink'
+
 - script: echo Hello, word!
   displayName: 'Run a one-line script'
 - task: CmdLine@2
