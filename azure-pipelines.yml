@@ -28,7 +28,7 @@ steps:
   displayName: 'Run eslint'
   inputs:
     filename: eslint
-    arguments: '.\changedFiles\**\*.js -o ..\eslint.json -f json'
+    arguments: 'eslint .\changedFiles\**\*.js -o ..\eslint.json -f json if errorlevel 0 ( echo Failure Reason Given is %errorlevel% exit /b %errorlevel%)'
     workingFolder: 'tin-drink'
     
 - task: CmdLine@2
