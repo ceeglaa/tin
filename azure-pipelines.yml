@@ -21,13 +21,16 @@ steps:
   inputs:
     filename: echo
     arguments: '$(System.PullRequest.PullRequestNumber)'
-- task: PowerShell@2
-  inputs:
-    filePath: 'teste.ps1'
+
 - task: PowerShell@2
   inputs:
     filePath: 'prepareFiles.ps1'
     arguments: '-commitId $(Build.SourceVersion)'
+
+- task: CmdLine@2
+  inputs:
+    script: 'eslint .\changedFiles\**\*.js -o ..\eslint.json -f json'
+    workingDirectory: 'tin-drink'
     
 - task: Bash@3
   inputs:
