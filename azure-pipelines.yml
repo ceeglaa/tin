@@ -24,12 +24,6 @@ steps:
     script: 'npm i -g eslint'
     workingDirectory: 'tin-drink'
 
-- task: CmdLine@1
-  displayName: 'Run eslint'
-  inputs:
-    filename: eslint
-    arguments: 'eslint .\changedFiles\**\*.js -o ..\eslint.json -f json if errorlevel 0 ( echo Failure Reason Given is %errorlevel% exit /b %errorlevel%)'
-    workingFolder: 'tin-drink'
     
 - task: CmdLine@2
   inputs:
