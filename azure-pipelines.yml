@@ -45,10 +45,17 @@ steps:
   inputs:
     script: 'dir /S'
     workingDirectory: 'tin-drink'
+
+- task: BatchScript@1
+  inputs:
+    filename: 'runeslint.bat'
+    workingFolder: 'tin-drink'
 - task: CmdLine@2
   inputs:
-    script: 'eslint src/**'
+    script: 'eslint src/**.js '
     workingDirectory: 'tin-drink'
+
+
 - task: CmdLine@2
   inputs:
     script: 'eslint .\changedFiles\**\*.js -o ..\eslint.json -f json'
