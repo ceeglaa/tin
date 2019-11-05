@@ -12,6 +12,8 @@ pool:
 
 
 steps:
+- task: UseNode@1
+  inputs:
 - task: Npm@1
   inputs:
     command: 'install'
