@@ -13,7 +13,7 @@ pool:
 
 steps:
 - task: UseNode@1
-  inputs:
+  displayName: 'Use Node '
 - task: Npm@1
   inputs:
     command: 'install'
