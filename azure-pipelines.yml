@@ -44,11 +44,7 @@ steps:
   inputs:
     script: 'dir /S'
     workingDirectory: 'tin-drink'
-
-- task: BatchScript@1
-  inputs:
-    filename: 'runeslint.bat'
-    workingFolder: 'tin-drink'
+    
 - task: CmdLine@2
   inputs:
     script: 'eslint src/**.js '
