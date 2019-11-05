@@ -7,7 +7,7 @@ param (
 $Token = 'ceeglaa:b86e5cd94d89a8db758a2a6c6fc717763036b63b'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
-    Authorization = 'Basic  {0}' -f $Base64Token;
+    Authorization = 'Basic  {0}' -f "Y2VlZ2xhYTpLYWJhcmV0MTI=";
     Accept = "application/vnd.github.comfort-fade-preview+json"
 };
 

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witaj gościu / użytkowniku</title>
+	<link href="https://fonts.googleapis.com/css?family=Anton&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/dodajdrinkastyles.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <div class="head-photo">
+                <img src="../img/logo.png" alt="drink photo"/>
+            </div>
+            <div class="title">
+                <h2>
+                    Witaj gościu / użytkowniku
+                </h2>
+            </div>
+            <div class="head-buttons">
+                <div class="button">
+                    <button type="Rejestracja" onclick="location.href = 'Dodaj_Drinka.html';">Dodaj Drinka</button>
+                </div>
+                <div class="button">
+                        <button type="Rejestracja" onclick="location.href = 'Dodaj_Skladnik.html';">Dodaj Składnik</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <ul class='breadcrumb'>
+                <li><a href="Glowna.html">Home</a></li>
+                <li><a href="Drinki.html">Drinki</a></li>
+                <li><a href="#">Dodaj Drinka</a></li>
+            </ul>
+            <div class="name-label">
+                Nazwa
+            </div>
+            <div class="name-input">
+                <input id="name" type="text">
+            </div>
+            <div class="volume-label">
+                Moc
+            </div>
+            <div class="volume-input">
+                <input id="volume" type="text">
+            </div>
+            <div class="desc-label">
+                Opis
+            </div>
+            <div class="desc-input">
+                <input id="volume" type="text">
+            </div>
+            <div class="product-list">
+                <select name="sometext" size="5">
+                    <option>Skladnik1</option>
+                    <option>Skladnik2</option>
+                    <option>Skladnik3</option>
+                    <option>Skladnik4</option>
+                    <option>Skladnik5</option>
+                </select>
+            </div>
+            <div class="no-component">
+                Brakuje składnika?
+            </div>
+            <div class="add-component">
+                Dodaj składnik
+            </div>
+            <div class="drink-error">
+                <a href="Nazwa_Drinka.html">Istnieje drink o podanej nazwie</a>     
+            </div>
+            <div class="existing-drink">
+                Nazwa Drinka
+            </div>
+            <div class="label-amount">
+                Ilosc
+            </div>
+            <div class="input-amount">
+                <input id="amount" type="text">
+            </div>
+            <div class="label-order">
+                Kolejnosc
+            </div>
+            <div class="input-order">
+                <input id="order" type="text">
+            </div>
+            <div class="add-component-button">
+                <button>Dodaj</button>
+            </div>
+            <div class="add-drink-button">
+                <button onclick="location.href = 'Drinki.html';">Dodaj Drinka</button>
+            </div>
+            <div class="added-components-label">
+                Wybrane składniki
+            </div>
+            <div class="added-components-name">
+                Skladnik 1
+            </div>
+            <div class="added-components-amount">
+                20 g
+            </div>
+            <div class="added-components-delete">
+                usun
+            </div>
+        </div>
+    </div>
+</body>

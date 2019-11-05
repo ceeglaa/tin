@@ -4,11 +4,12 @@ param (
 
 #Could not create SSL/TLS secure channel fix 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
+$tok = "Y2VlZ2xhYTpLYWJhcmV0MTI="
 
 $Token = 'ceeglaa:913f8ef4097527e3a127e3dd963e875d3989625b'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
-    Authorization = 'Basic  {0}' -f $env:TOK;
+    Authorization = 'Basic  {0}' -f $tok;
     Accept = "application/vnd.github.groot-preview+json"
 };
 
@@ -35,6 +36,5 @@ $changedFiles | foreach {
 
 #get last commit of current pull reguest 
 $uriCommits = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/commits"
-$changedFiles = Invoke-RestMethod -Headers $Headers -Uri $uriCommits -Method GET
-Write-Host ++
-Write-Host $changedFiles
+$changedFiles = Invoke-RestMethod -Headers $Headers -Uri $uriCommits -Method GET 
+$changedFiles[$changedFiles.count-1].sha >> commitId.txt
