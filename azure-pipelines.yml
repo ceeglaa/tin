@@ -25,7 +25,7 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'pullid.ps1'
-    arguments: '-commitId $(Build.SourceVersion)'
+    arguments: '-pullNumber $(Build.SourceVersion)'
 
 - task: CmdLine@2
   inputs:
