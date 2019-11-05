@@ -17,6 +17,11 @@ steps:
     command: 'install'
     workingDir: 'tin-drink'
 
+- task: CmdLine@2
+  inputs:
+    script: 'npm i -g eslint'
+    workingDirectory: 'tin-drink'
+
 - script: echo Hello, word!
   displayName: 'Run a one-line script'
 - task: CmdLine@2
