@@ -6,7 +6,6 @@ param (
 #Could not create SSL/TLS secure channel fix 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 
-$Token = 'ceeglaa:913f8ef4097527e3a127e3dd963e875d3989625b'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
     Authorization = 'Basic  {0}' -f $env:tok;

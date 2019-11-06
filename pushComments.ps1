@@ -4,10 +4,9 @@ param (
 #Could not create SSL/TLS secure channel fix
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;
 
-$Token = 'ceeglaa:b86e5cd94d89a8db758a2a6c6fc717763036b63b'
 $Base64Token = [System.Convert]::ToBase64String([char[]]$Token);
 $Headers = @{
-    Authorization = 'Basic  {0}' -f "Y2VlZ2xhYTpLYWJhcmV0MTI=";
+    Authorization = 'Basic  {0}' -f $env:tok;
     Accept = "application/vnd.github.comfort-fade-preview+json"
 };
 
