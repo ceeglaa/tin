@@ -40,11 +40,26 @@ steps:
     filePath: 'pullid.ps1'
     arguments: '-pullNumber $(Build.SourceVersion)'
 
+
+
 - task: CmdLine@2
   inputs:
     script: 'dir /S'
     workingDirectory: 'tin-drink'
-    
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      
+      
+      node_modules/eslint/bin/eslint.js src/**.js
+      if [[ $? != 0 ]] ; then
+          echo "Fix style violations"
+          exit 1
+      fi
+      echo "All changed files are good"
+        
 - task: CmdLine@2
   inputs:
     script: 'eslint --max-warnings 1000 src/**.js '
