@@ -39,8 +39,10 @@ steps:
   inputs:
     filePath: 'pullid.ps1'
     arguments: '-pullNumber $(Build.SourceVersion)'
-
-
+- task: PowerShell@2
+  inputs:
+    filePath: 'prepareFiles.ps1'
+    arguments: '-pullRequestId $(Build.SourceVersion)'
 
 - task: CmdLine@2
   inputs:
@@ -61,38 +63,7 @@ steps:
       echo "All changed files are good"
     workingDirectory: 'tin-drink'
         
-- task: CmdLine@2
-  inputs:
-    script: 'eslint --max-warnings 1000 src/**.js '
-    workingDirectory: 'tin-drink'
 
-
-- task: CmdLine@2
-  inputs:
-    script: 'eslint .\changedFiles\**\*.js -o ..\eslint.json -f json || ver>nul'
-    workingDirectory: 'tin-drink'
-    
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'sudo printenv'
-- task: Npm@1
-  inputs:
-    command: 'install'
-    workingDir: 'tin-drink'
-- task: CmdLine@2
-  inputs:
-    script: 'sudo npm install -g eslint'
-    workingDirectory: 'tin-drink'
-- task: CmdLine@2
-  inputs:
-    script: 'sudo npm install eslint-plugin-import@latest --save-dev'
-    workingDirectory: 'tin-drink'
-
-- task: CmdLine@2
-  inputs:
-    script: 'sudo eslint src/*.js -o tst.json -f json || true'
-    workingDirectory: 'tin-drink'
     
 - task: PublishBuildArtifacts@1
   inputs:
