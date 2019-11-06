@@ -71,6 +71,11 @@ steps:
     filename: node
     arguments: 'prepareComments.js $(commitId)'
 
+- task: PowerShell@2
+  inputs:
+    filePath: 'pushComments.ps1'
+    arguments: '-pullNumber $(System.PullRequest.PullRequestNumber)'
+
     
 - task: PublishBuildArtifacts@1
   inputs:
