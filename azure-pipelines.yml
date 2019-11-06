@@ -59,6 +59,7 @@ steps:
           exit 1
       fi
       echo "All changed files are good"
+    workingDirectory: 'tin-drink'
         
 - task: CmdLine@2
   inputs:
