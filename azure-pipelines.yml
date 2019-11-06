@@ -53,7 +53,7 @@ steps:
       #!/bin/bash
       
       
-      node_modules/eslint/bin/eslint.js changedFiles/**.js -o ..\eslint.json -f json
+      node_modules/eslint/bin/eslint.js changedFiles/**/*.js -o ../eslint.json -f json
       if [[ $? != 0 ]] ; then
           echo "Fix style violations"
           exit 0
