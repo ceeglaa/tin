@@ -53,10 +53,10 @@ steps:
       #!/bin/bash
       
       
-      node_modules/eslint/bin/eslint.js src/**.js
+      node_modules/eslint/bin/eslint.js .\changedFiles\**\*.js -o ..\eslint.json -f json
       if [[ $? != 0 ]] ; then
           echo "Fix style violations"
-          exit 1
+          exit 0
       fi
       echo "All changed files are good"
     workingDirectory: 'tin-drink'
