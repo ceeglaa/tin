@@ -47,7 +47,7 @@ steps:
     
 - task: CmdLine@2
   inputs:
-    script: 'eslint src/**.js '
+    script: 'eslint --max-warnings 1000 src/**.js '
     workingDirectory: 'tin-drink'
 
 
