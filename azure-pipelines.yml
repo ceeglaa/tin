@@ -62,7 +62,14 @@ steps:
       fi
       echo "All changed files are good"
     workingDirectory: 'tin-drink'
-        
+- task: PowerShell@2
+  inputs:
+    filePath: 'create_pipeline_variable.ps1'
+- task: CmdLine@1
+  displayName: 'Run prepare comments'
+  inputs:
+    filename: node
+    arguments: 'prepareComments.js $(commitId)'
 
     
 - task: PublishBuildArtifacts@1
