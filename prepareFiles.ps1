@@ -30,8 +30,24 @@ $changedFiles | foreach {
         $_.patch >> "tin-drink/onlyChanges/$file"
     }
 }
+function Get-Commit($page) {
+    $uriCommits = "https://api.github.com/repos/ceeglaa/tin/pulls/6/commits?page=$page&per_page=100"
+    $changedFiles = Invoke-RestMethod -Headers $Headers -Uri $uriCommits -Method GET
+    $lastCommitId = $changedFiles[$changedFiles.count-1].sha
+   return $lastCommitId
+   }
 
-#get last commit of current pull reguest 
-$uriCommits = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/commits"
-$changedFiles = Invoke-RestMethod -Headers $Headers -Uri $uriCommits -Method GET 
-$changedFiles[$changedFiles.count-1].sha >> commitId.txt
+#get last commit of current pull reguest
+$lasCommit = Get-Commit(3)
+if ($lasCommit) {
+    $lasCommit >> commitId.txt
+} else {
+    $lasCommit = Get-Commit(2)
+    if ($lasCommit) {
+        $lasCommit >> commitId.txt
+    } else {
+        $lasCommit = Get-Commit(1)
+        Write-Host $lasCommit
+        $lasCommit >> commitId.txt
+    }
+}
