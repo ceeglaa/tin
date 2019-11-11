@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../style/styles.css">
     <link rel="stylesheet" href="../style/rejestracjastyles.css">
+
     
 </head>
 
@@ -45,7 +46,7 @@
             <label for="fname">Imie</label>
         </div>
         <div class='fname-input'>
-            <input id="fname" type="text">
+            <input id="xfname" type="text">
         </div>
         <div class='sname-label'>
             <label for="sname">Nazwisko</label>
@@ -82,20 +83,21 @@
         </div>
         <div class='register-button'>
             <div class="button">
-                <button type="Rejestracja" onclick="location.href = 'Glowna.html';" >Rejestracja</button>
+                <button id="rejestracja" type="Rejestracja" >Rejestracja</button>
             </div>
         </div>
-        <div class="password-error">
+        <div id="password-error" class="password-error">
             błędne hasło
         </div>
         <div class="repassword-error">
             hasła nie są takie same
         </div>  
-        <div class="email-error">
+        <div id="email-error" class="email-error">
             błędny email
         </div>
         <div class="login-error">
             istnieje uźytkownik o podanym loginie
         </div>   
     </div>
+    <script type="text/javascript" src="../js/rejestracja.js"></script>
 </body>

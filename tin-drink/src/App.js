@@ -2,16 +2,6 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function xsh_djnui(){
-  s =  3245;
-
-  w = s + z;
-}
-
-function checkCOmmitId(){
-  let check = ' check';
-}
-
 function App() {
   return (
     <div className="App">
