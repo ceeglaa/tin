@@ -13,12 +13,15 @@ $Headers = @{
 
 #Getting files changed in pull request copy them to the tin-drin/changedFiles file
 
-$UriPullRequest = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/files"
+$UriPullRequest = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/files?per_page=100"
 $changedFiles = Invoke-RestMethod -Headers $Headers -Uri $UriPullRequest -Method GET
 Invoke-RestMethod -Headers $Headers -Uri $UriPullRequest
+$changedFiles >> changed.txt
+
 
 $changedFiles | foreach {
     $file = $_.filename
+    $file >> wszystke.txt
     $patch = $_.patch
     $path = Split-Path -Path $file
     if(Test-Path -Path $_.filename)
