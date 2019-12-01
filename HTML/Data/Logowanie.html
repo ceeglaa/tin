@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witaj gościu / użytkowniku</title>
+	<link href="https://fonts.googleapis.com/css?family=Anton&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="../style/logowaniestyles.css">
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <div class="head-photo">
+                <img src="../img/logo.png" alt="drink photo"/>
+            </div>
+            <div class="title">
+                <h2>
+                    Witaj gościu / użytkowniku
+                </h2>
+            </div>
+            <div class="head-buttons">
+                <div class="button">
+                    <button type="Rejestracja" onclick="location.href = 'Rejestracja.html';">Rejestracja</button>
+                </div>
+                <div class="button">
+                        <button type="Rejestracja" onclick="location.href = 'Logowanie.html';">Logowanie</button>
+                </div>
+            </div>
+        </div>
+
+    <div class='grid-container'>
+        
+        <ul class='breadcrumb'>
+            <li><a href="Glowna.html">Home</a></li>
+            <li><a href="#">Logowanie</a></li>
+        </ul>
+
+        <div class='login-label'>
+                <label for="login">Login</label>
+        </div>
+        <div class='login-input'>
+            <input id="login" type="text">
+        </div>
+        <div class='password-label'>
+            <label for="password" class="last-name">Password</label>
+        </div>
+        <div class='password-input'>
+            <input id="password" type="password">
+        </div>
+        <div class='forget-password'>
+            zapomniałem loginu lub hasła
+        </div>
+        <div class='login-button'>
+            <div class="button">
+                <button type="Rejestracja" onclick="location.href = 'Logowanie.html';" >Zaloguj</button>
+            </div>
+        </div>
+        <div class="login-error">
+            błędny login lub hasło
+        </div>
+        <div class='no-account'>
+            Nie masz jeszcze konta?
+        </div>
+        <div class='create-account'>
+            Załóż teraz!
+        </div>
+    </div>
+</body>
