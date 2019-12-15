@@ -35,7 +35,7 @@ class Drink {
 
     static delete(id) {
         console.log(id);
-        let drinkIndex = drinkExtent.findIndex(d => {d.id === parseFloat(id)})
+        let drinkIndex = drinkExtent.findIndex(d => {return d.id === parseFloat(id)})
         console.log(drinkIndex);
         drinkExtent.splice(drinkIndex, 1);
     } 
