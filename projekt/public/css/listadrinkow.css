@@ -1,0 +1,93 @@
+@font-face{
+    src: url(fonts/EmblemaOne-Regular.ttf);
+    font-family: Emblema-One;
+}
+
+.drink-list {
+    text-align: center;
+    display: inline;
+    grid-area: 3/1/4/1;
+    margin: 20px 20px 20px 20px;
+}
+
+.single-drink {
+    width: 30%;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.drink-photo {
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+.drink-photo img {
+    width: 260px;
+    height: 300px;
+}
+
+.drink-name {
+    text-align: center;
+    font-family: Emblema-One;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.drink-author {
+    text-align: center;
+    font-family: Emblema-One;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.drink-vol {
+    text-align: center;
+    font-family: Emblema-One;
+    font-size: 20px;
+    margin-bottom: 10px; 
+}
+
+.change-drinks-buttons {
+    float: left;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+}
+
+.prev-next-buttons {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #292c2f;
+    color: #EFE6D2;
+    margin: 5px 30px 5px 30px
+  }
+  
+  .prev-next-buttons:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .round {
+    border-radius: 50%;
+  }
+
+  input[type="submit"]
+{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 180px;
+    height: 32px;
+    background: #d6b091;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    cursor: pointer;
+    
+}

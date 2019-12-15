@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witaj gościu / użytkowniku</title>
+    <link rel="icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+    <!-- <link href='https://fonts.googleapis.com/css?family=Emblema One' rel='stylesheet'> -->
+    <link rel="stylesheet" href="../css/podzial.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/listaskladnikow.css">
+    
+</head>
+
+<body>
+    <script type="text/javascript" src="../js/ingredientsApiCalls.js"></script>
+    <div class="wrapper">
+        <div class="head">
+            <div class="header-limiter">
+                <a href="#"><img src="../img/logo.png" alt="drink photo"/></a>
+                <h1> Witaj Gościu / Użytkowniku</h1>
+                <ul>
+                    <li><a href="#">Zaloguj</a></li>
+                    <li><a href="#">Rejestracja</a></li>
+                </ul>
+            </div>
+        </div>
+        <ul class="breadcrumb">
+            <li><a href="../index.html">Strona Główna</a></li>
+            <li><a href="#">Dodaj Składnik</a></li>
+        </ul>
+        <div id="ingredients-list" class="ingredients-list">
+            <div class="radio-box" id="radio-box">
+                <input type="radio" id="gazowane-check" name="gazowane-check"/>
+                <label for="gazowane-check">Gazowane</label>
+                
+                <input type="radio" id="niegazowane-check" name="niegazowane-check"/>
+                <label for="niegazowane-check">Niegazowane</label>
+                
+                <input type="radio" id="alkohol-check" name="alkohol-check"/>
+                <label for="alkohol-check">Alkohol</label>
+            </div>
+            <div class="all-ingredients">
+                <input type="text" name="name" placeholder="Nazwa składnika"/>
+                <label id="error-ingredients-list" class="errors-text"></label>
+                <select id="ingredients-list-check" class="ingerdients" name="sometext" onchange="onSelectIngredient()"  multiple>
+                </select>
+            </div>
+            <div class="ingredient-details" >
+                <div id="ingredient-details">
+
+                </div>
+                <input id="edit-ingredient-button" type="submit" value="Edytuj Składnik"/>
+                <input id="delete-ingredient-button" type="submit" value="Usuń Składnik"/>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/ingredientList.js"></script>
+</body>
