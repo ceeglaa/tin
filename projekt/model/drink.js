@@ -60,10 +60,10 @@ class Drink {
         let ing1 = allIngredients[0];
         let ing2 = allIngredients[1];
         let ing3 = allIngredients[2];
-        Drink.add(new Drink('Drink1', 25, 'slodki', [{ingredient: ing1, quantity: 34}, {ingredient: ing2, quantity: 36}], 23, 'przykładowy opis drinka', `../img/mohito.jpg`))
-        Drink.add(new Drink('Drnink2', 30, 'slodki', [{ingredient: ing2, quantity: 50}, {ingredient: ing3, quantity: 100}], 15, 'przykładowy opis drinka', `../img/sotb.jpg`))
-        Drink.add(new Drink('Drnink3', 25, 'slodki', [{ingredient: ing1, quantity: 34}, {ingredient: ing2, quantity: 36}], 23, 'przykładowy opis drinka', `../img/mohito.jpg`))
-        Drink.add(new Drink('Drink4', 30, 'slodki', [{ingredient: ing2, quantity: 50}, {ingredient: ing3, quantity: 100}], 15, 'przykładowy opis drinka', `../img/sotb.jpg`))
+        Drink.add(new Drink('Drink1', 25, 'slodki', [{ingredient: ing1, quantity: 34}, {ingredient: ing2, quantity: 36}], 23, 'przykładowy opis drinka', `../img/Drink1.jpg`))
+        Drink.add(new Drink('Drnink2', 30, 'slodki', [{ingredient: ing2, quantity: 50}, {ingredient: ing3, quantity: 100}], 15, 'przykładowy opis drinka', `../img/Drnink2.jpg`))
+        Drink.add(new Drink('Drnink3', 25, 'slodki', [{ingredient: ing1, quantity: 34}, {ingredient: ing2, quantity: 36}], 23, 'przykładowy opis drinka', `../img/Drnink3.jpg`))
+        Drink.add(new Drink('Drink4', 30, 'slodki', [{ingredient: ing2, quantity: 50}, {ingredient: ing3, quantity: 100}], 15, 'przykładowy opis drinka', `../img/Drink4.jpg`))
     }
 }
 
