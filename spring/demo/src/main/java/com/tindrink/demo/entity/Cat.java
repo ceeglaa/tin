@@ -2,26 +2,30 @@ package com.tindrink.demo.entity;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-public class Dog {
+public class Cat {
 
     private Long id;
     private String name;
+    private String color;
     private int age;
     private List<Connect> connect;
 
-    public Dog () {
+    public Cat() {
 
     }
 
-    private Dog(String name, int age) {
+    
+    public Cat(String name, String color, int age) {
         this.name = name;
+        this.color = color;
         this.age = age;
     }
     
@@ -33,6 +37,14 @@ public class Dog {
         this.name = name;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public int getAge() {
         return age;
     }
@@ -42,7 +54,7 @@ public class Dog {
     }
 
     @Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -56,13 +68,14 @@ public class Dog {
         return connect;
     }
 
-    public void setConnect(Connect connect) {
-        this.connect.add(connect);
+    public void setConnect(List<Connect> connect) {
+        this.connect = connect;
     }
 
+
+
+
     
 
-  
 
-    
 }

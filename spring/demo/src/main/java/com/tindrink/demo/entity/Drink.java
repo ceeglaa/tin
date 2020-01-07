@@ -1,31 +1,33 @@
 package com.tindrink.demo.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import java.util.HashSet;
+
+import java.util.Set;
+
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonMerge;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Entity
 public class Drink {
 
     private static int nextId = 1;
-    private static List<Drink> drinkExtent = new ArrayList<>();
+    // private static List<Drink> drinkExtent = new ArrayList<>();
     @JsonView(Views.List.class)
     private String name;
     @JsonView(Views.List.class)
@@ -35,37 +37,36 @@ public class Drink {
     @JsonView(Views.List.class)
     private float price;
     @JsonView(Views.List.class)
-    private String desc;
+    private String drinkDesc;
     @JsonView(Views.List.class)
     private String photoPath;
     @JsonView(Views.List.class)
-    private Integer id;
+    private int id;
     @JsonIgnore
     @JsonView(Views.DrinkDetails.class)
-    private List<Amount> amounts = new ArrayList<>();
+    private Set<Amount> amounts = new HashSet<>();
 
     @JsonCreator
     public Drink() {
-        this.id = nextId++;
     }
 
-    public Drink(String name, float vol, String taste, float price, String desc, String photoPath) {
+    public Drink(String name, float vol, String taste, float price, String drinkDesc, String photoPath) {
         this.name = name;
         this.vol = vol;
         this.taste = taste;
         this.price = price;
-        this.desc = desc;
+        this.drinkDesc = drinkDesc;
         this.photoPath = photoPath;
         this.id = nextId++;
     }
 
-    public static void addDrink(Drink drink){
-        drinkExtent.add(drink);
-    }
+    // public static void addDrink(Drink drink){
+    //     drinkExtent.add(drink);
+    // }
 
-    public static void deleteDrink(int id){
-        drinkExtent.removeIf(drink -> drink.id.equals(id));
-    }
+    // public static void deleteDrink(int id){
+    //     drinkExtent.removeIf(drink -> drink.id.equals(id));
+    // }
 
     public String getName() {
         return name;
@@ -99,12 +100,12 @@ public class Drink {
         this.price = price;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDrinkDesc() {
+        return drinkDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDrinkDesc(String drinkDesc) {
+        this.drinkDesc = drinkDesc;
     }
 
     public String getphotoPath() {
@@ -115,67 +116,89 @@ public class Drink {
         this.photoPath = photoPath;
     }
 
-
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
 
-    public static List<Drink> getAllDrinks(){
-        return drinkExtent;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void addAmount(Amount amount){
-        if(amount.getDrink() != this){
-            throw new IllegalArgumentException("Incorret drink");
-        }
-        if(!this.amounts.contains(amount)) {
-            this.amounts.add(amount);
-        }
+    // public static List<Drink> getAllDrinks(){
+    //     return drinkExtent;
+    // }
+
+    public void setAmounts(Set<Amount> amounts){
+      this.amounts = amounts;
     }
 
-    public List<Amount> getAmounts() {
+    @OneToMany(mappedBy="drink",
+    cascade= CascadeType.ALL)
+    public Set<Amount> getAmounts() {
         return amounts;
     }
 
-
-    public static Drink getDrink(int id){
-        Drink res;
-        res = drinkExtent
-            .stream()
-            .filter(ing -> ing.id == id)
-            .findAny()
-            .orElse(null);
-        return res;
+    public void addAmount(Amount amount){
+        if(this.amounts == null) {
+            this.amounts = new HashSet<>();
+        }
+        if(!this.amounts.contains(amount)) {
+            this.amounts.add(amount);
+            amount.setDrink(this);
+        }
     }
+
+    public void removeAmount(Amount amount) {
+        if (this.amounts.contains(amount)) {
+            this.amounts.remove(amount);
+        }
+    }
+
+    public void clearAmounts(){
+        this.amounts.clear();
+    }
+
+
+    // public static Drink getDrink(int id){
+    //     Drink res;
+    //     res = drinkExtent
+    //         .stream()
+    //         .filter(ing -> ing.id == id)
+    //         .findAny()
+    //         .orElse(null);
+    //     return res;
+    // }
 
     
 
-    public static void initData(){
+    // public static void initData(){
 
-        Ingredient.initData();
+    //    Ingredient.initData();
 
-        Drink drink1 = new Drink("Drink1", 25, "slodki", 23, "przykładowy opis drinka", "../img/Drink2.jpg");
-        Drink drink2 = new Drink("Drnink2", 30, "slodki", 15, "przykładowy opis drinka", "../img/Drink2.jpg");
-        Drink drink3 = new Drink("Drnink3", 25, "slodki", 23, "przykładowy opis drinka", "../img/Drink3.jpg");
-        Drink drink4 = new Drink("Drink4", 30, "slodki", 15, "przykładowy opis drinka", "../img/Drink4.jpg");
-        Drink.addDrink(drink1);
-        Drink.addDrink(drink2);
-        Drink.addDrink(drink3);
-        Drink.addDrink(drink4);
+    //     Drink drink1 = new Drink("Drink1", 25, "slodki", 23, "przykładowy opis drinka", "../img/Drink2.jpg");
+    //     Drink drink2 = new Drink("Drnink2", 30, "slodki", 15, "przykładowy opis drinka", "../img/Drink2.jpg");
+    //     Drink drink3 = new Drink("Drnink3", 25, "slodki", 23, "przykładowy opis drinka", "../img/Drink3.jpg");
+    //     Drink drink4 = new Drink("Drink4", 30, "slodki", 15, "przykładowy opis drinka", "../img/Drink4.jpg");
+    //     Drink.addDrink(drink1);
+    //     Drink.addDrink(drink2);
+    //     Drink.addDrink(drink3);
+    //     Drink.addDrink(drink4);
 
-        List<Ingredient> ingredients = Ingredient.getAllIngredients();
-        Amount am1 = new Amount(ingredients.get(0), drinkExtent.get(0), 20 );
-        Amount am2 = new Amount(ingredients.get(1), drinkExtent.get(0), 20 );
+    //     List<Ingredient> ingredients = Ingredient.getAllIngredients();
+    //     Amount am1 = new Amount(ingredients.get(0), drinkExtent.get(0), 20 );
+    //     Amount am2 = new Amount(ingredients.get(1), drinkExtent.get(0), 20 );
 
-        Amount am3 = new Amount(ingredients.get(0), drinkExtent.get(1), 340 );
-        Amount am4 = new Amount(ingredients.get(2), drinkExtent.get(1), 550 );
-        Amount am5 = new Amount(ingredients.get(3), drinkExtent.get(1), 20 );
+    //     Amount am3 = new Amount(ingredients.get(0), drinkExtent.get(1), 340 );
+    //     Amount am4 = new Amount(ingredients.get(2), drinkExtent.get(1), 550 );
+    //     Amount am5 = new Amount(ingredients.get(3), drinkExtent.get(1), 20 );
 
-        Amount am7 = new Amount(ingredients.get(1), drinkExtent.get(2), 201 );
-        Amount am8 = new Amount(ingredients.get(3), drinkExtent.get(2), 50 );
-        Amount am9 = new Amount(ingredients.get(0), drinkExtent.get(2), 240 );
+    //     Amount am7 = new Amount(ingredients.get(1), drinkExtent.get(2), 201 );
+    //     Amount am8 = new Amount(ingredients.get(3), drinkExtent.get(2), 50 );
+    //     Amount am9 = new Amount(ingredients.get(0), drinkExtent.get(2), 240 );
     
-    }
+    // }
 
  
 
