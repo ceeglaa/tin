@@ -1,0 +1,4 @@
+com\tindrink\demo\dao\IngredientDAOHibernateImpl.class
+com\tindrink\demo\dao\IngredientDAO.class
+com\tindrink\demo\entity\Cat.class
+com\tindrink\demo\entity\Connect.class
