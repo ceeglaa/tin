@@ -80,15 +80,21 @@ const saveForm = apiCall => {
     let photoPath =  `../img/${drinkName.value}.jpg`
     console.log(photoPath);
 
-    const drinkData = {
+    const drink = {
         name: drinkName.value,
         vol: drinkVol.value,
         taste: drinkTaste.value,
-        ingredients: selectedIngredientArray,
         price: 140,
         desc: drinkDesc.value,
         photoPath: photoPath
     }
+
+    const drinkData = {
+        drink: drink,
+        amounts: selectedIngredientArray
+    }
+
+
     savePhoto(savePhotoCall);
     apiCall(drinkData);
 
@@ -99,9 +105,9 @@ const calculateDrinkVol = () => {
     let allIngredientsGrammage = 0;
     let alcoholGrammage = 0;
     selectedIngredientArray.forEach(ing => {
-    allIngredientsGrammage += parseFloat(ing.quantity);
+    allIngredientsGrammage += parseFloat(ing.amount);
         if(ing.ingredient.isAlc) {
-            alcoholGrammage += (parseFloat(ing.ingredient.vol)/100) * (parseFloat(ing.quantity));
+            alcoholGrammage += (parseFloat(ing.ingredient.vol)/100) * (parseFloat(ing.amount));
         }
     })
 
@@ -119,7 +125,7 @@ const initializeIngredientArray = ingredientList => {
 }
 
 const renderIngredientList = renderedArray => {
-    
+    console.log(renderedArray);
     let ingredientsHtml = '';
 
     renderedArray.forEach(i => {
@@ -142,6 +148,7 @@ const round = (n, k) => {
 function addIngredient() {
 
     selIng = ingredients.options[ingredients.selectedIndex]
+    console.log(selIng);
     selectedIngredientId = selIng.value;
     ingQty = ingredientQuantity.value;
 
@@ -151,7 +158,7 @@ function addIngredient() {
     
     let addedIngAmount = {
         ingredient: selectedIngredient,
-        quantity: ingQty
+        amount: ingQty
     }
 
     selectedIngredientArray.push(addedIngAmount);
@@ -161,6 +168,7 @@ function addIngredient() {
 }
 
 function renderSelectedIngredientsTable(selectIngRenderArray){
+    console.log(selectIngRenderArray);
     let ingredientsHtml = ''
     let i = 0;
     selectedIngredientArray = selectIngRenderArray;
@@ -168,7 +176,7 @@ function renderSelectedIngredientsTable(selectIngRenderArray){
         ingredientsHtml += `
         <tr>
             <td>${ing.ingredient.name}</td>            
-            <td>${ing.quantity}</td>            
+            <td>${ing.amount}</td>            
             <td class="actions">
                 <a href="#" onClick="deleteIngredientFromDrink(${i})">Usuń</a>
             </td>            
@@ -188,10 +196,9 @@ const renderDrinkData = drink => {
     drinkTaste.value = drink.taste;
     drinkDesc.value = drink.desc;
     let selectedIngredient = []
-    selectedIngredient = Array.from(drink.ingredients);
+    //selectedIngredient = Array.from(drink.ingredients);
 
-    console.log(selectedIngredient);
-    renderSelectedIngredientsTable(selectedIngredient);
+    renderSelectedIngredientsTable(drink.amounts);
 }
 
 

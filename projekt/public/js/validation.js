@@ -40,7 +40,7 @@ const validateAddEditDrink = (callback, apiCall, drinkId) => {
 
 const validateCreateIngredient = (callback, apiCall) => {
     let errors = 0;
-    if(!validateRequiredField(ingredientNameValidation) || !validateMinLength(ingredientNameValidation, 5) || !validateIsString(ingredientNameValidation)) {
+    if(!validateRequiredField(ingredientNameValidation) || !validateMinLength(ingredientNameValidation, 3) || !validateIsString(ingredientNameValidation)) {
         console.log('name')
         errors++;
     }

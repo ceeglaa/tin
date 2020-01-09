@@ -1,13 +1,18 @@
 const ingredientApiBaseUrl = 'http://localhost:3001/api/ingredient';
+const springApi = 'http://localhost:8080/api/ingredients';
 
 function getIngredientListCall(callback) {
     const req = new XMLHttpRequest();
-    req.open('GET', ingredientApiBaseUrl, true);
+    req.open('GET', springApi, true);
     req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {
             if (req.status == 200) {
                 const respText = req.responseText;
+                console.log('RESPONSE SRPING');
+                console.log(respText);
                 const userData = JSON.parse(respText);
+                console.log('DO CALLBACKA SRPING');
+                console.log(userData);
                 callback(userData);
             } else {
                 dump("Błąd podczas ładowania strony\n");
@@ -21,7 +26,7 @@ function addIngredientCall(ingredientData){
     console.log('inside addIngredientCall')
     console.log(ingredientData);
     const req = new XMLHttpRequest;
-    req.open('POST', ingredientApiBaseUrl, true);
+    req.open('POST', springApi, true);
     const ingredientDataString = JSON.stringify(ingredientData);
     req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     console.log(ingredientDataString);
@@ -56,13 +61,24 @@ function deleteIngredientCall(ingredientId, callback) {
 
 function getIngredientDetailsCall(ingredientId, callback) {
     const req = new XMLHttpRequest;
-    req.open('GET', ingredientApiBaseUrl + `/${ingredientId}`, true);
+    req.open('GET', springApi + `/${ingredientId}`, true);
     req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {
             if (req.status == 200) {
                 const respText = req.responseText;
+                console.log('RESPONSE SRPING');
+                console.log(respText);
+                const userData = JSON.parse(respText);
+                console.log('DO CALLBACKA SRPING');
+                console.log(userData);
+                callback(userData);
                 const ingredient = JSON.parse(respText);
-                callback(ingredient[0]);
+                console.log('DO CALLBACKA SRPING 222'); 
+                console.log(ingredient);
+
+                console.log('DO CALLBACKA OD ZERA 222'); 
+                console.log(ingredient[0]);
+                callback(ingredient);
             } else {
                 dump("Błąd podczas ładowania strony\n");
             }
