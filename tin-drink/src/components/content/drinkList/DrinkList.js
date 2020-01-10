@@ -35,7 +35,6 @@ class DrinkList extends React.Component {
             {this.state.drinks.map((drink) => {
                 return <SingleDrink drink={drink} function={this.test.bind(this)}/>
             })}
-            DrinkList
         </div>
     )
     }
