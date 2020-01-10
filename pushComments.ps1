@@ -22,6 +22,7 @@ Get-ChildItem "eslintComments" -Filter *.json |
         $content = $badContent -replace [regex]::escape('\\'), [regex]::escape('/')
         If (Select-String -Path "tin-drink/onlyChanges/$path" -Pattern $lineWithPlus) 
         {
+        Write-Host $content
            Invoke-RestMethod -Headers $Headers -Uri $url -Body $content -Method POST
         }   
     }
