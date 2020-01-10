@@ -1,0 +1,9 @@
+.content {
+	display: grid;
+	grid-template-columns: 25% 1fr
+}
+
+.sidebar-pos{
+    display: grid;
+    grid-area: 1/1/2/2;
+}

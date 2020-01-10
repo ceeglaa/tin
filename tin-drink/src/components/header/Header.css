@@ -1,0 +1,38 @@
+.header-limiter {
+    width: 100%;
+	text-align: center;
+    height: 100%;
+    float: left;
+}
+
+.header-limiter h1 {
+	font: normal 28px Cookie, Arial, Helvetica, sans-serif;
+	line-height: 40px;
+	margin: 0;
+}
+
+.header-limiter a {
+	color: #ffffff;
+    text-decoration: none;
+    height: 100%;
+}
+
+.header-limiter ul {
+	font: 14px Arial, Helvetica, sans-serif;
+	list-style: none;
+	line-height: 1;
+	float: right;
+}
+
+.header-limiter ul li {
+	display: inline-block;
+	margin-left: 15px;
+	opacity:0.9;
+}
+
+.header-limiter ul li:last-child a {
+	font-weight: bold;
+	background-color: #3a3c3e;
+	padding: 10px 15px;
+	border-radius: 3px;
+}
