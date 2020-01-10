@@ -11,6 +11,13 @@ class DrinkList extends React.Component {
         console.log('arbert')
     }
 
+    test = () => {
+        var x =8;
+        console.log(ddf);
+
+        (func)
+    }
+
     fetchData = () => {
         fetch("http://localhost:8080/api/drinks")
         .then(res => res.json())
