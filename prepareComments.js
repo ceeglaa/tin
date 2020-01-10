@@ -10,6 +10,7 @@ function main(){
 
 function createComments(comPath, comCommitId, comLine, comBody, fileName) {
     console.log("IN FUNCTION -->>"  + comLine );
+    console.log("FILE ---->>>> " + fileName);
     let com = {
         path: comPath,
         commit_id: comCommitId,
