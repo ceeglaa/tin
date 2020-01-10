@@ -1,15 +1,20 @@
 import React from 'react';
+import {BrowserRouter, NavLink, Route} from 'react-router-dom';
 import './Sidebar.css'
 
 function Sidebar() {
+  console.log('RENDER SIDEBAR')
   return (
     <div className="sidebar">
     <nav className="nav">
         <ul>
-            <li><a href="data/Lista_Drinków.html">Lista Drinków</a></li>
-            <li><a href="data/Lista_Składników.html">Lista Składników</a></li>
-            <li><a href="data/Dodaj_Drinka_two.html">Dodaj Drinka</a></li>
-            <li><a href="data/Dodaj_Skladnik.html">Dodaj Skladnik</a></li>
+          
+            <li><NavLink to="/Lista_Drinkow" exact>Lista Drinków</NavLink></li>
+            <li><NavLink to="/Lista_Składnikow" exact>Lista Składników</NavLink></li>
+            <li><NavLink to="/Dodaj_Drinka_two" exact>Dodaj Drinka</NavLink></li>
+            <li><NavLink to="/Dodaj_Skladnik" exact>Dodaj Skladnik</NavLink></li>
+
+            
         </ul>
     </nav>
 </div>

@@ -1,6 +1,10 @@
-.content {
+.content-nav {
 	display: grid;
 	grid-template-columns: 25% 1fr
+}
+
+.content{
+    display: grid;
 }
 
 .sidebar-pos{
