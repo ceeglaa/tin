@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import Header from './components/header/Header'
 import Content from './components/content/Content'
+import DrinkList from './components/content/drinkList/DrinkList'
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       </div>
       <div className="content-pos">
         <Content />
+        <DrinkList />
       </div>
     </div>
   );
