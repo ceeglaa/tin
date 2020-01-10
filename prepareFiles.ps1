@@ -34,7 +34,7 @@ $changedFiles | foreach {
     }
 }
 function Get-Commit($page) {
-    $uriCommits = "https://api.github.com/repos/ceeglaa/tin/pulls/6/commits?page=$page&per_page=100"
+    $uriCommits = "https://api.github.com/repos/ceeglaa/tin/pulls/$pullRequestId/commits?page=$page&per_page=100"
     $changedFiles = Invoke-RestMethod -Headers $Headers -Uri $uriCommits -Method GET
     $lastCommitId = $changedFiles[$changedFiles.count-1].sha
    return $lastCommitId
