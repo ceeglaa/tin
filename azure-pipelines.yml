@@ -75,10 +75,3 @@ steps:
   inputs:
     filePath: 'pushComments.ps1'
     arguments: '-pullNumber $(System.PullRequest.PullRequestNumber)'
-
-    
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'tin-drink/tst.json'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
