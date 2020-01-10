@@ -20,6 +20,7 @@ Get-ChildItem "eslintComments" -Filter *.json |
         $lineContent = (Get-Content -Path $data.path -TotalCount $data.line)[-1]
         $lineWithPlus = [regex]::escape('+' + $lineContent)
         $content = $badContent -replace [regex]::escape('\\'), [regex]::escape('/')
+        Write-Host $content
         If (Select-String -Path "tin-drink/onlyChanges/$path" -Pattern $lineWithPlus) 
         {
         Write-Host $content
