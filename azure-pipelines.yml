@@ -43,9 +43,3 @@ steps:
   inputs:
     script: 'sudo eslint src/*.js -o tst.json -f json || true'
     workingDirectory: 'tin-drink'
-    
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: 'tin-drink/tst.json'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
