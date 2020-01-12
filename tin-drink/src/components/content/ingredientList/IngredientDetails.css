@@ -1,0 +1,27 @@
+.ingredient-details h2 {
+    text-align: center;
+    margin: 70px 10px 60px 10px;
+  }
+
+.property {
+    text-align: left;
+    margin-top: 12px;
+    float: left;
+    width: 45%;
+    height: 30px;
+    margin-left: 5%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .property-value {
+    margin-top: 12px;
+    float: left;
+    width: 45%;
+    height: 30px;
+    margin-right: 5%;
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 17px;
+  }

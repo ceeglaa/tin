@@ -16,6 +16,35 @@ class DrinkList extends React.Component {
         console.log('arbert')
     }
 
+    handleEditDrinkButton = (e, drinkId) => {
+        e.preventDefault();
+        this.props.history.push({
+            pathname: '/Dodaj_Drinka',
+            id: drinkId
+        })
+    }
+
+    handleDeletetDrinkButton = (e, drinkId) => {
+        e.preventDefault();
+        fetch(`http://localhost:8080/api/drinks/${drinkId}`, {
+            method: 'delete',
+            headers: {"Content-Type":"application/json"}
+       })
+       .then(res =>{
+           if(res.status === 200) {
+               return res.text()
+           } else {
+               return "Wystąpił nieoczekiwany błąd. Spróbuj ponownie"
+           }
+       })
+       .then(data => {
+           this.props.history.push({
+               pathname: '/info',
+               text: data
+           })
+       })
+    }
+
     fetchData = () => {
         fetch("http://localhost:8080/api/drinks")
         .then(res => res.json())
@@ -80,7 +109,7 @@ class DrinkList extends React.Component {
         <>
             <div className="drink-list">
                 {this.state.visibleDrinks.map((drink) => {
-                    return <SingleDrink drink={drink} function={this.test.bind(this)} key={drink.id}/>
+                    return <SingleDrink drink={drink} functionEdit={this.handleEditDrinkButton.bind(this)} functionDelete={this.handleDeletetDrinkButton.bind(this)} key={drink.id}/>
                 })}
             </div>
             <div id="change-drinks-buttons" class="change-drinks-buttons">

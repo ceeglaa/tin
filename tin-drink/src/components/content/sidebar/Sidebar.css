@@ -1,4 +1,10 @@
+.sidebar-nav {
+	display: grid;
+	grid-template-columns: 25% 1fr;
+}
+
 .sidebar {
+	grid-area: 1/1/2/2;
 	max-width: 100%;
 	background: #C6BABB;
 	font-size: 0.75em;

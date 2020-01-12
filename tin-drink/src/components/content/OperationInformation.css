@@ -1,0 +1,27 @@
+.back-to-main {
+    text-align: center;
+}
+
+.back-to-main h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: rgb(24, 158, 170);
+}
+
+
+.back-to-main a {
+	line-height: 4em;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.4em;
+	color: #D78C1A;
+	display: block;
+    transition: all 1s ease;
+}
+
+.back-to-main a:hover {
+    letter-spacing: 0.1em;
+	color: rgb(24, 158, 170);
+    border-bottom: 2px solid rgb(130, 21, 149);
+    border-top: 2px solid rgb(130, 21, 149);
+}
