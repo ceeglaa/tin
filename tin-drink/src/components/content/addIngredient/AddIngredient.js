@@ -6,6 +6,8 @@ import {useHistory} from 'react-router-dom';
 class AddIngredient extends React.Component {
 
     state = {
+        apiMethod: "",
+        id: "",
         name: "",
         price: "",
         taste: "",
@@ -62,13 +64,14 @@ class AddIngredient extends React.Component {
                 price: this.state.price,
                 vol: this.state.vol
             }
-            fetch('http://localhost:8080/api/ingredients', {
-                 method: 'post',
+            let url = this.state.id ? `http://localhost:8080/api/ingredients/${this.state.id}` : 'http://localhost:8080/api/ingredients'
+            fetch(url, {
+                 method: this.state.apiMethod,
                  headers: {"Content-Type":"application/json"},
                  body: JSON.stringify(jsonBody)
             })
             .then(res =>{
-                if(res.status === 201 || res.status === 409) {
+                if(res.status === 200 || res.status === 201 || res.status === 409) {
                     return res.text()
                 } else {
                     return "Wystąpił nieoczekiwany błąd. Spróbuj ponownie"
@@ -82,6 +85,31 @@ class AddIngredient extends React.Component {
             })
         }
     }
+
+          componentDidMount() {
+          if(this.props.location.id){
+            fetch(`http://localhost:8080/api/ingredients/${this.props.location.id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    apiMethod: "PUT",
+                    id: data.id,
+                    name: data.name,
+                    price: data.price,
+                    taste: data.taste,
+                    vol: data.vol,
+                    isAlco: data.isAlco,
+                    isGas: data.isGas 
+                })
+            });
+              console.log("EDYCJA DRINKA")
+          } else {
+              this.setState({
+                  apiMethod: "POST"
+              })
+          }
+      }
 
 
     render() {
@@ -124,7 +152,7 @@ class AddIngredient extends React.Component {
                             onChange={this.handleChange}
                         /><span id="error-vol" className="errors-text">{this.state.volerror}</span>
                         <br></br>
-                        <label for="isAlco"> Czy Alkohol </label>
+                        <label htmlFor="isAlco"> Czy Alkohol </label>
                         <input 
                             type="checkbox" 
                             id="isAlco"
@@ -133,7 +161,7 @@ class AddIngredient extends React.Component {
                             onChange={this.handleChange}
                         /> 
                         <br></br>
-                        <label for="isGas"> Czy Gazowany </label>
+                        <label htmlFor="isGas"> Czy Gazowany </label>
                         <input 
                             type="checkbox" 
                             id="isGas"

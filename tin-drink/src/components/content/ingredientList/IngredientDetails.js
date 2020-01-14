@@ -8,7 +8,6 @@ class IngredientDeatils extends React.Component {
     }
 
     getIngredientDetails(id){
-        console.log(id)
         fetch(`http://localhost:8080/api/ingredients/${id}`)
         .then(res => res.json())
         .then(data => {
@@ -19,17 +18,12 @@ class IngredientDeatils extends React.Component {
     }
 
     componentDidUpdate(){
-        console.log(" DID UPDATE ING DETAILS")
-        console.log(this.props.id !== '')
-        console.log(this.props)
-        console.log(this.state.ingredient.id )
         if(this.props.id !== '' && parseInt(this.props.id) && parseInt(this.props.id) !== this.state.ingredient.id ) {
              this.getIngredientDetails(this.props.id);
         }
     }
 
     render() {
-        console.log(this.state.ingredient);
         return(
         <>
              <div class="ingredient-details" >
@@ -42,8 +36,8 @@ class IngredientDeatils extends React.Component {
                     <div class="property">Smak</div> <div class="property-value">{this.state.ingredient.taste}</div>
                     <div class="property">Czy gazowany</div> <div class="property-value"> <input type="checkbox" disabled="disabled" checked={Boolean(this.state.ingredient.isGas)}/> </div>
                 </div>
-                <input id="edit-ingredient-button" type="submit" value="Edytuj Składnik"/>
-                <input id="delete-ingredient-button" type="submit" value="Usuń Składnik"/>
+                <input id="edit-ingredient-button" type="submit" value="Edytuj Składnik" onClick={e => this.props.editFunction(e)}/>
+                <input id="delete-ingredient-button" type="submit" value="Usuń Składnik" onClick={e => this.props.deleteFunction(e)}/>
             </div>
         </>
     )

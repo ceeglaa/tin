@@ -17,6 +17,40 @@ class IngredientList extends React.Component {
         })
     }
 
+    handleEditButton = e => {
+        e.preventDefault();
+        if(this.state.selectedIngredient) {
+            this.props.history.push({
+                pathname: '/Dodaj_Skladnik',
+                id: this.state.selectedIngredient
+            })
+        }
+    }
+
+    handleDeleteButton = e => {
+        e.preventDefault();
+        console.log('USUWAM SKLADNIER')
+        if(this.state.selectedIngredient) {
+            fetch(`http://localhost:8080/api/ingredients/${this.state.selectedIngredient}`, {
+                method: 'delete',
+                headers: {"Content-Type":"application/json"}
+            })
+            .then(res =>{
+                if(res.status === 200 || res.status === 409) {
+                    return res.text()
+                } else {
+                    return "Wystąpił nieoczekiwany błąd. Spróbuj ponownie"
+                }
+            })
+            .then(data => {
+                this.props.history.push({
+                    pathname: '/info',
+                    text: data
+                })
+            })
+    }
+    }
+
     componentDidMount(){
         console.log('DID MOUNT')
         fetch("http://localhost:8080/api/ingredients")
@@ -30,13 +64,6 @@ class IngredientList extends React.Component {
     }
 
     filterInputHandler = value => {
-        // let formData = new FormData();
-        // formData.append("files",value.files[0])
-        // console.log(value.files[0])
-        // fetch('http://localhost:8080/api/drinks/photo', {
-        //     method: 'post',
-        //     body: formData
-        // })
         let filteredIngredientArray = this.state.ingredients.filter(ing => {return ing.name.toLowerCase().includes(value.toLowerCase())});
         this.setState({
             displayedIngredients: filteredIngredientArray
@@ -44,13 +71,13 @@ class IngredientList extends React.Component {
     }
 
     render() {
-        console.log(this.state.ingredients)
+        console.log(this.state.selectedIngredient)
         return(
             <>
             <div className="ingredients-list">
                 <AllIngredients onSelectIngredient={this.onSelectIngredient.bind(this)}/>
                 <div className="ingredients-details">
-                    <IngredientDetails id={this.state.selectedIngredient}/>
+                    <IngredientDetails id={this.state.selectedIngredient} editFunction={this.handleEditButton.bind(this)} deleteFunction={this.handleDeleteButton.bind(this)}/>
                 </div>
             </div>
 
