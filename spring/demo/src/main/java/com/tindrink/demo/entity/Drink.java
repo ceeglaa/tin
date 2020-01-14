@@ -1,14 +1,12 @@
 package com.tindrink.demo.entity;
 
-
 import java.util.HashSet;
 
 import java.util.Set;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,7 +40,6 @@ public class Drink {
     private String photoPath;
     @JsonView(Views.List.class)
     private int id;
-    @JsonIgnore
     @JsonView(Views.DrinkDetails.class)
     private Set<Amount> amounts = new HashSet<>();
 
@@ -134,8 +131,8 @@ public class Drink {
       this.amounts = amounts;
     }
 
-    @OneToMany(mappedBy="drink",
-    cascade= CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="drink",
+    cascade= CascadeType.ALL, orphanRemoval = true)
     public Set<Amount> getAmounts() {
         return amounts;
     }

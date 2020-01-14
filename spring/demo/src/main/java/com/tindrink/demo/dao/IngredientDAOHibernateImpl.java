@@ -73,6 +73,24 @@ public class IngredientDAOHibernateImpl implements IngredientDAO {
         theQuery.executeUpdate();
     }
 
+    @Override
+    public Ingredient findByName(String name) {
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Ingredient> theQuery = currentSession.createQuery("FROM Ingredient WHERE name =:name", Ingredient.class);
+
+        theQuery.setParameter("name", name);
+
+        List<Ingredient> ingredients = theQuery.getResultList();
+
+        if(ingredients.size() > 0) {
+            return ingredients.get(0);
+        } else {
+            return null;
+        }
+    }
+
     
     
 

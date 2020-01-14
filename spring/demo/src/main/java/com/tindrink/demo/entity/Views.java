@@ -4,6 +4,10 @@ public class Views {
 
     public static interface Amount{}
 
+    public static interface Use{}
+
+    public static interface Admin extends Use{}
+
     public static interface List {}
 
     public static interface DrinkDetails extends List, Amount{}

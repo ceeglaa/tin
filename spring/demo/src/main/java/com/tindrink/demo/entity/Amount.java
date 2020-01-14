@@ -69,8 +69,7 @@ public class Amount {
     }
 
     @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-        CascadeType.DETACH, CascadeType.REFRESH},
-        fetch= FetchType.EAGER)
+        CascadeType.DETACH, CascadeType.REFRESH})
     public Drink getDrink() {
         return drink;
     }

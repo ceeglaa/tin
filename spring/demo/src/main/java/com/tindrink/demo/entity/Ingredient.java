@@ -49,7 +49,7 @@ public class Ingredient {
     @NotNull
     @Min(0)
     @JsonView(Views.List.class)
-    private int vol;
+    private float vol;
  
     @JsonView(Views.IngredientDetails.class)
     private Set<Amount> amounts = new HashSet<>();
@@ -109,11 +109,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getVol() {
+    public float getVol() {
         return vol;
     }
 
-    public void setVol(int vol) {
+    public void setVol(float vol) {
         this.vol = vol;
     }
 

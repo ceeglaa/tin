@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import com.tindrink.demo.entity.Amount;
+import com.tindrink.demo.entity.Ingredient;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -35,8 +36,6 @@ public class AmountDAOHibernateImpl implements AmountDAO {
     @Transactional
     public void deleteOnDrinkId(int id) {
 
-        System.out.println("inside delete on drink id");
-
         Session currentSession = entityManager.unwrap(Session.class);
 
         Query theQuery = currentSession.createQuery("DELETE FROM Amount WHERE drink_id =:drinkId");
@@ -45,6 +44,25 @@ public class AmountDAOHibernateImpl implements AmountDAO {
 
         theQuery.executeUpdate();
 
+    }
+
+    @Override
+    public Boolean getAmountByIngredientId(int id) {
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Amount> theQuery = currentSession.createQuery("FROM Amount WHERE ingredient_id =:ingredientId", Amount.class);
+
+        theQuery.setParameter("ingredientId", id);
+
+        List<Amount> ingredients = theQuery.getResultList();
+
+        if (ingredients.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    
     }
 
 

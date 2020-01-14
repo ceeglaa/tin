@@ -6,15 +6,18 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.tindrink.demo.dao.AmountDAO;
 import com.tindrink.demo.dao.IngredientDAO;
 import com.tindrink.demo.dao.IngredientDAOHibernateImpl;
 import com.tindrink.demo.entity.Drink;
 import com.tindrink.demo.entity.Ingredient;
-import com.tindrink.demo.entity.Dog;
 import com.tindrink.demo.entity.Views;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +28,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:3001", maxAge = 3600)
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class IngredientRestController {
 
 
     private IngredientDAO ingredientDAO;
+    private AmountDAO amountDAO;
 
     @Autowired
-    public IngredientRestController(IngredientDAO ingredientDAO) {
+    public IngredientRestController(IngredientDAO ingredientDAO, AmountDAO amountDAO) {
         this.ingredientDAO = ingredientDAO;
+        this.amountDAO = amountDAO;
     }
 
     @GetMapping("/")
@@ -57,11 +62,16 @@ public class IngredientRestController {
 		return ingredientDAO.findById(ingredientId);
     }
     
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/ingredients")
-    public Ingredient createIngredient (@Valid @RequestBody Ingredient ingredient) {
-        System.out.println("price new ing ");
-        ingredientDAO.save(ingredient);
-        return ingredient;
+    public ResponseEntity<String> createIngredient (@Valid @RequestBody Ingredient ingredient) {
+        
+        if(ingredientDAO.findByName(ingredient.getName())==null) {
+            ingredientDAO.save(ingredient);
+            return new ResponseEntity<>("Składnik o nazwie " + ingredient.getName() + " został dodany", HttpStatus.CREATED);
+        } else {         
+             return new ResponseEntity<>("Produkt " + ingredient.getName() + " już istnieje", HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping("/ingredients/{ingredientId}")
@@ -72,9 +82,14 @@ public class IngredientRestController {
     }
 
     @DeleteMapping("/ingredients/{ingredientId}")
-    public String deleteIngredient(@PathVariable int ingredientId){
-        ingredientDAO.deleteById(ingredientId);
-        return "Ingredient had been deleted";
+    public ResponseEntity<String> deleteIngredient(@PathVariable int ingredientId){
+        if(amountDAO.getAmountByIngredientId(ingredientId)) {
+            return new ResponseEntity<>("Produkt jest używany w drinkach.", HttpStatus.CONFLICT);
+        } else {
+            ingredientDAO.deleteById(ingredientId);
+            return new ResponseEntity<>("Produkt został usunięty", HttpStatus.OK);
+        }
+        
     }
 
 }
