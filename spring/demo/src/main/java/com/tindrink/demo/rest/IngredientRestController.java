@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class IngredientRestController {
@@ -62,7 +62,7 @@ public class IngredientRestController {
 		return ingredientDAO.findById(ingredientId);
     }
     
-    @PreAuthorize("hasRole('USER')")
+    // @PreAuthorize("hasRole('USER')")
     @PostMapping("/ingredients")
     public ResponseEntity<String> createIngredient (@Valid @RequestBody Ingredient ingredient) {
         

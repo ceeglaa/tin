@@ -39,7 +39,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/signin", "/signup", "/role");
+
 		web.ignoring().antMatchers(HttpMethod.GET);
+
+		web.ignoring().antMatchers(HttpMethod.POST);
+
+		// web.ignoring().antMatchers(HttpMethod.PUT);
+
+		// web.ignoring().antMatchers(HttpMethod.DELETE);
 	}
 
 	@Autowired
@@ -49,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-		http.csrf().disable().cors().disable().authorizeRequests().antMatchers("/signin", "/signup", "/role").permitAll().anyRequest()
+		http.csrf().disable().cors().disable().authorizeRequests().antMatchers("/signin", "/signup").permitAll().anyRequest()
 			.authenticated().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
