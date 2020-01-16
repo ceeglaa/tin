@@ -13,6 +13,7 @@ import com.tindrink.demo.vo.JwtRequest;
 import com.tindrink.demo.vo.JwtResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,12 +23,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@CrossOrigin
 public class JwtRestController {
 
 	@Autowired
@@ -86,13 +89,19 @@ public class JwtRestController {
 
 		String token = jwtUtil.generateToken(user);
 
-		return new ResponseEntity<JwtResponse>(new JwtResponse(token), HttpStatus.OK);
+		return new ResponseEntity<JwtResponse>(new JwtResponse(token, roles, username), HttpStatus.OK);
 	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<String> signup(@RequestBody User user) {
-		userAuthService.saveUser(user);
-		return new ResponseEntity<String>("User successfully registered", HttpStatus.OK);
+
+		try{
+			userAuthService.saveUser(user);
+			return new ResponseEntity<String>("User " + user.getUserName() + " został zarejestrowny", HttpStatus.OK);
+		} catch (DataIntegrityViolationException e) {
+			return new ResponseEntity<String>("Username " + user.getUserName() + " juz istnieje", HttpStatus.CONFLICT);
+		}
+
 	}
 
 	@PostMapping("/role")

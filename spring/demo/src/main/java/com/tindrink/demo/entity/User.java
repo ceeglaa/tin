@@ -1,6 +1,7 @@
 package com.tindrink.demo.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +46,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Column(unique = true)
     public String getUserName() {
         return userName;
     }
@@ -61,6 +63,7 @@ public class User {
         this.password = password;
     }
 
+    @Column(unique = true)
     public String getEmail() {
         return email;
     }
