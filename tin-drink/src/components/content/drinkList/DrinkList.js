@@ -24,11 +24,22 @@ class DrinkList extends React.Component {
         })
     }
 
+    handleShowDrinkButton = (e, drinkId) => {
+        e.preventDefault();
+        this.props.history.push({
+            pathname: '/ShowDrink',
+            id: drinkId
+        })
+    }
+
     handleDeletetDrinkButton = (e, drinkId) => {
         e.preventDefault();
         fetch(`http://localhost:8080/api/drinks/${drinkId}`, {
             method: 'delete',
-            headers: {"Content-Type":"application/json"}
+            headers: {
+                "Content-Type":"application/json",
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+            }
        })
        .then(res =>{
            if(res.status === 200) {
@@ -43,6 +54,12 @@ class DrinkList extends React.Component {
                text: data
            })
        })
+       .catch(err => {
+        this.props.history.push({
+            pathname: '/info',
+            text: "Opcaj tylko dla zalogowanych uzytkowników"
+        })
+    });
     }
 
     fetchData = () => {
@@ -86,6 +103,36 @@ class DrinkList extends React.Component {
         })
     }
 
+    handleAddToFavouriteButton = (id) => {
+        console.log(localStorage.getItem('token'));
+        fetch(`http://localhost:8080/api/users/${localStorage.getItem('userName')}/${id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type":"application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Authorization":`Bearer ${localStorage.getItem('token')}`
+               },
+       })
+       .then(res =>{
+           if(res.status === 200) {
+               return res.text()
+           } else {
+               return "Wystąpił nieoczekiwany błąd. Spróbuj ponownie"
+           }
+       })
+       .then(data => {
+           this.props.history.push({
+               pathname: '/info',
+               text: data
+           })
+       })
+       .catch(err => {
+        this.props.history.push({
+            pathname: '/info',
+            text: "Opcja tylko dla zalogowanych uzytkowników"
+        })
+    });
+    }
 
     componentDidMount(){
         console.log('DID MOUNT')
@@ -109,7 +156,7 @@ class DrinkList extends React.Component {
         <>
             <div className="drink-list">
                 {this.state.visibleDrinks.map((drink) => {
-                    return <SingleDrink drink={drink} functionEdit={this.handleEditDrinkButton.bind(this)} functionDelete={this.handleDeletetDrinkButton.bind(this)} key={drink.id}/>
+                    return <SingleDrink drink={drink} functionAddFavourite={this.handleAddToFavouriteButton.bind(this)} functionEdit={this.handleEditDrinkButton.bind(this)} functionDelete={this.handleDeletetDrinkButton.bind(this)} key={drink.id} functionShow={this.handleShowDrinkButton.bind(this)}/>
                 })}
             </div>
             <div id="change-drinks-buttons" class="change-drinks-buttons">

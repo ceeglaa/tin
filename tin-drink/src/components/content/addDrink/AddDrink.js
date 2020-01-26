@@ -124,7 +124,7 @@ class AddDrink extends React.Component {
                 taste: this.state.drinkTaste,
                 price: 140,
                 drinkDesc: this.state.drinkDesc,
-                photoPath: this.state.file
+                photoPath: this.state.file ? this.state.file : this.state.photoPath
             }
 
             const drinkData = {
@@ -163,6 +163,12 @@ class AddDrink extends React.Component {
                     text: data
                 })
             })
+            .catch(err => {
+                this.props.history.push({
+                    pathname: '/info',
+                    text: "Opcaj tylko dla zalogowanych uzytkowników"
+                })
+            });
 
         } else {
             console.log("set state err")
@@ -220,7 +226,7 @@ class AddDrink extends React.Component {
                     drinkName: data.name,
                     drinkTaste: data.taste,
                     drinkDesc: data.drinkDesc,
-                    drinkVol: "",
+                    drinkVol: data.vol,
                     photoPath: data.photoPath
 
                 })

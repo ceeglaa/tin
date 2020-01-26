@@ -8,6 +8,7 @@ class Login extends React.Component {
         password: "",
         userNameError: "",
         passwordError: "",
+        formError: "",
         isError: 0
     }
 
@@ -47,21 +48,29 @@ class Login extends React.Component {
            })
            .then(res =>{
                if(res.status === 200 || res.status === 201 || res.status === 409) {
-                   return res.text()
+                return  res.text()
                } else {
-                   return "Wystąpił nieoczekiwany błąd. Spróbuj ponownie"
+                   return ("Wystąpił nieoczekiwany błąd. Spróbuj ponownie", true)
                }
            })
            .then(data => {
                 let response = JSON.parse(data)
-                sessionStorage.setItem('token', response.token)
-                sessionStorage.setItem('roles', response.role)
-                sessionStorage.setItem('userName', response.username)
-                // this.props.render();
-                console.log(this.props)
-                this.props.history.push({
-                    pathname: "/"
-                })
+                console.log(response);
+                if (response.token !== null && response.role !== null && response.username !== null ) {
+                    localStorage.setItem('token', response.token)
+                    localStorage.setItem('roles', response.role)
+                    localStorage.setItem('userName', response.username)
+                    // this.props.render();
+                    console.log(this.props)
+                    this.props.history.push({
+                        pathname: "/"
+                    })
+                } else {
+                    this.setState({
+                        ...errors,
+                        formError: response.statement
+                    })
+                }
            })
         } else {
             this.setState({
@@ -104,7 +113,7 @@ class Login extends React.Component {
                             onClick={e => this.handleRegisterSubmit(e)}
                         />
                         <div class="error" id = "error">
-                        { this.state.birthDateError ? "Formularz zawiera błędy" : ""}
+                        { this.state.formError ? this.state.formError : ""}
                         </div>
                 </div>
             </div>

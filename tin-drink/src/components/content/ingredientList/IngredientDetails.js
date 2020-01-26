@@ -26,15 +26,15 @@ class IngredientDeatils extends React.Component {
     render() {
         return(
         <>
-             <div class="ingredient-details" >
+             <div className="ingredient-details" >
                 <div id="ingredient-details">
                     <h2>Dane Składnika</h2>
-                    <div class="property">Nazwa</div> <div class="property-value">{this.state.ingredient.name}</div>
-                    <div class="property">Średnia cena</div> <div class="property-value">{this.state.ingredient.price}</div>
-                    <div class="property">Czy alkohol</div><div class="property-value"> <input type="checkbox" disabled="disabled" checked={Boolean(this.state.ingredient.isAlc)}/> </div>
-                    <div class="property">Moc</div> <div class="property-value">{this.state.ingredient.vol ? this.state.ingredient.vol : "0"} %</div>
-                    <div class="property">Smak</div> <div class="property-value">{this.state.ingredient.taste}</div>
-                    <div class="property">Czy gazowany</div> <div class="property-value"> <input type="checkbox" disabled="disabled" checked={Boolean(this.state.ingredient.isGas)}/> </div>
+                    <div className="property">Nazwa</div> <div class="property-value">{this.state.ingredient.name}</div>
+                    <div className="property">Średnia cena</div> <div class="property-value">{this.state.ingredient.price}</div>
+                    <div className="property">Czy alkohol</div><div class="property-value"> <input type="checkbox" disabled="disabled" checked={Boolean(this.state.ingredient.isAlc)}/> </div>
+                    <div className="property">Moc</div> <div class="property-value">{this.state.ingredient.vol ? this.state.ingredient.vol : "0"} %</div>
+                    <div className="property">Smak</div> <div class="property-value">{this.state.ingredient.taste}</div>
+                    <div className="property">Czy gazowany</div> <div class="property-value"> <input type="checkbox" disabled="disabled" checked={Boolean(this.state.ingredient.isGas)}/> </div>
                 </div>
                 <input id="edit-ingredient-button" type="submit" value="Edytuj Składnik" onClick={e => this.props.editFunction(e)}/>
                 <input id="delete-ingredient-button" type="submit" value="Usuń Składnik" onClick={e => this.props.deleteFunction(e)}/>

@@ -4,6 +4,13 @@ import './OperationInformation.css'
 
 class OperationInformation extends React.Component{
 
+    state = {
+        glowna: {
+            link: '/',
+            title: 'Strona główna'
+        }
+    }
+
     render() {
         return(
         <>

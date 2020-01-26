@@ -51,6 +51,12 @@ class IngredientList extends React.Component {
                     text: data
                 })
             })
+            .catch(err => {
+                this.props.history.push({
+                    pathname: '/info',
+                    text: "Opcaj tylko dla zalogowanych uzytkowników"
+                })
+            });
     }
     }
 

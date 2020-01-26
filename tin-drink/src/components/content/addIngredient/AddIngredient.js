@@ -18,6 +18,7 @@ class AddIngredient extends React.Component {
         priceerror: "",
         tasteerror: "",
         volerror: "",
+        formError: ""
     }
 
     handleChange = event => {
@@ -45,10 +46,14 @@ class AddIngredient extends React.Component {
            isError = (errors.volerror = Validation.validateRequiredField(this.state.vol) || Validation.validateIsNumber(this.state.vol) || Validation.validateRangeNumer(this.state.vol, 0.1, 99) || Validation.validateFloat(this.state.price) || "") ? true : false
        }
 
-       this.setState({
-           ...this.state,
-           ...errors
-       })
+       if (isError) {
+            this.setState({
+                ...this.state,
+                ...errors,
+                formError: "formularz zawiera błędy"
+            })
+       }
+
        return isError;
     }
 
@@ -69,11 +74,13 @@ class AddIngredient extends React.Component {
                  method: this.state.apiMethod,
                  headers: {
                      "Content-Type":"application/json",
-                     'Access-Control-Allow-Origin': '*'
+                     "Access-Control-Allow-Origin": "*",
+                     "Authorization":`Bearer ${localStorage.getItem('token')}`
                     },
                  body: JSON.stringify(jsonBody)
             })
             .then(res =>{
+                console.log(res);
                 if(res.status === 200 || res.status === 201 || res.status === 409) {
                     return res.text()
                 } else {
@@ -86,6 +93,12 @@ class AddIngredient extends React.Component {
                     text: data
                 })
             })
+            .catch(err => {
+                this.props.history.push({
+                    pathname: '/info',
+                    text: "Opcaj tylko dla zalogowanych uzytkowników"
+                })
+            });
         }
     }
 
@@ -181,7 +194,7 @@ class AddIngredient extends React.Component {
                             onClick={e => this.onsubmit(e)}
                         />
                         <div class="error" id = "error">
-                            Formularz zawiera błędy
+                        { this.state.formError ? this.state.formError : ""}
                         </div>
                     </form>
                 </div>
