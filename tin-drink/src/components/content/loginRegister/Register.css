@@ -1,0 +1,46 @@
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+.registration-nav {
+    display: grid;
+    grid-template-columns: 17% 66% 17%;
+}
+
+.registration {
+    grid-area: 1/2/1/3;
+    margin: 10px 5px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: left;
+}
+
+h1
+{
+    margin: 0 0 20px 0;
+    font-weight: 300;
+    font-size: 28px;
+}
+
+.registration 
+input[type="text"],
+input[type="date"],
+input[type="password"]
+{
+    width: 65%;
+    float: left;
+    margin-right: 5px;
+}
+
+.registration 
+input[type="submit"] 
+{
+    margin-top: 0px;
+    width: 400px;
+}
+
+.registration .error {
+    display: inline;
+}

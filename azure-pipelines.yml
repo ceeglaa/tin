@@ -1,0 +1,77 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- develop
+
+pool:
+  vmImage: 'vs2015-win2012r2'
+
+
+steps:
+- task: UseNode@1
+  displayName: 'Use Node '
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: 'tin-drink'
+
+- task: CmdLine@2
+  inputs:
+    script: 'npm i -g eslint'
+    workingDirectory: 'tin-drink'
+
+    
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
+
+- task: CmdLine@1
+  displayName: 'Run git diff changes'
+  inputs:
+    filename: echo
+    arguments: '$(System.PullRequest.PullRequestNumber)'
+
+- task: PowerShell@2
+  inputs:
+    filePath: 'pullid.ps1'
+    arguments: '-pullNumber $(System.PullRequest.PullRequestNumber)'
+- task: PowerShell@2
+  inputs:
+    filePath: 'prepareFiles.ps1'
+    arguments: '-pullRequestId $(System.PullRequest.PullRequestNumber)'
+
+- task: CmdLine@2
+  inputs:
+    script: 'dir /S'
+    workingDirectory: 'tin-drink'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      #!/bin/bash
+      
+      
+      node_modules/eslint/bin/eslint.js changedFiles/**/*.js -o ../eslint.json -f json
+      if [[ $? != 0 ]] ; then
+          echo "Fix style violations"
+          exit 0
+      fi
+      echo "All changed files are good"
+    workingDirectory: 'tin-drink'
+- task: PowerShell@2
+  inputs:
+    filePath: 'create_pipeline_variable.ps1'
+- task: CmdLine@1
+  displayName: 'Run prepare comments'
+  inputs:
+    filename: node
+    arguments: 'prepareComments.js $(commitId)'
+
+- task: PowerShell@2
+  inputs:
+    filePath: 'pushComments.ps1'
+    arguments: '-pullNumber $(System.PullRequest.PullRequestNumber)'
