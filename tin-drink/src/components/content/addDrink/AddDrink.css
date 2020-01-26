@@ -45,7 +45,9 @@
     grid-area: 2/3/2/3;
 }
 
-input[type="text"], 
+input[type="text"],
+input[type="date"],
+input[type="password"] 
 textarea
 {
     display: block;

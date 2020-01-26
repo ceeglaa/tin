@@ -32,8 +32,11 @@ class IngredientList extends React.Component {
         console.log('USUWAM SKLADNIER')
         if(this.state.selectedIngredient) {
             fetch(`http://localhost:8080/api/ingredients/${this.state.selectedIngredient}`, {
-                method: 'delete',
-                headers: {"Content-Type":"application/json"}
+                method: 'DELETE',
+                headers: {
+                  'Access-Control-Allow-Origin': '*',
+                  'Content-Type': 'application/json'
+                },
             })
             .then(res =>{
                 if(res.status === 200 || res.status === 409) {

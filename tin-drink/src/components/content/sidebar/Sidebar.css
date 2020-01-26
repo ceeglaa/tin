@@ -28,6 +28,7 @@
 	margin: 3.2em 0;
 }
 .nav ul li a {
+	text-align: left;
 	line-height: 4em;
 	text-transform: uppercase;
 	text-decoration: none;

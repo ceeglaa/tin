@@ -19,7 +19,8 @@
     background-color: #F9EEEF;
 }
 
-input[type="text"], 
+input[type="text"],
+input[type="password"],
 textarea
 {
     display: block;

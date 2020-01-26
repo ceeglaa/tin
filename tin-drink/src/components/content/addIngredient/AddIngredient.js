@@ -67,7 +67,10 @@ class AddIngredient extends React.Component {
             let url = this.state.id ? `http://localhost:8080/api/ingredients/${this.state.id}` : 'http://localhost:8080/api/ingredients'
             fetch(url, {
                  method: this.state.apiMethod,
-                 headers: {"Content-Type":"application/json"},
+                 headers: {
+                     "Content-Type":"application/json",
+                     'Access-Control-Allow-Origin': '*'
+                    },
                  body: JSON.stringify(jsonBody)
             })
             .then(res =>{

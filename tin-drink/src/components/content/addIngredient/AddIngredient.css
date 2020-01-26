@@ -38,16 +38,3 @@ form input[type="password"]
     background-color: #F9EEEF;
 }
 
-.errors-text {
-    float: right;
-    margin-left: 20px;
-    width: 150px;
-	font-size: 0.85em;
-    color: #e74c3c;
-}
-
-
-.field-error {
-    background-color: rgb(255, 255, 255) !important;
-    border: 3px solid red !important;
-}

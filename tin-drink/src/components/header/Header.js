@@ -1,18 +1,52 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import './Header.css'
 
-const Header = () => {
-    return (
-        <>
-            <div className="header-limiter">
-                <h1> Witaj Gościu / Użytkowniku</h1>
-                <ul>
-                    <li><a href="#">Zaloguj</a></li>
-                    <li><a href="#">Rejestracja</a></li>
-                </ul>
-            </div>
-        </>
-    )
+class Header extends React.Component {
+
+    state = {
+        helloString: "Gościu"
+    }
+
+
+    rerenderHeader = () => {
+        this.forceUpdate();
+    }
+
+    // componentDidUpdate() {
+    //     console.log(sessionStorage.length)
+    //     if(sessionStorage.getItem('userName')) {
+    //         this.setState({
+    //             helloString: sessionStorage.getItem('userName')
+    //         })
+    //     }
+    // }
+
+    componentDidMount() {
+        console.log(sessionStorage.length)
+        if(sessionStorage.getItem('userName')) {
+            this.setState({
+                helloString: sessionStorage.getItem('userName')
+            })
+        }
+    }
+
+    render () {
+        console.log('render header')
+        return (
+            <>
+                <div className="header-limiter">
+                    <h1> Witaj {this.state.helloString}</h1>
+                    <ul>
+                        <li><NavLink to="/Logowanie" exact>Zaloguj</NavLink></li>
+                        <li><NavLink to="/Rejestracja" exact>Rejestracja</NavLink></li>
+                    </ul>
+                </div>
+            </>
+        )
+    }
 }
+
+
 
 export default Header;
