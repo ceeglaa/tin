@@ -1,0 +1,60 @@
+
+@font-face{
+    src: url(../../../static/fonts/EmblemaOne-Regular.ttf);
+    font-family: Emblema-One;
+}
+.single-drink {
+    width: 30%;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.drink-name {
+    text-align: center;
+    font-family: Emblema-One;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.drink-author {
+    text-align: center;
+    font-family: Emblema-One;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.drink-vol {
+    text-align: center;
+    font-family: Emblema-One;
+    font-size: 20px;
+    margin-bottom: 10px; 
+}
+
+.drink-photo {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.drink-photo img {
+    width: 260px;
+    height: 300px;
+}
+
+input[type="submit"]
+{
+    padding: 1px 6px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 180px;
+    height: 32px;
+    background: #d6b091;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    cursor: pointer;
+    
+}

@@ -1,0 +1,52 @@
+.show-single-drink {
+    display: block;
+    width: 100%;
+}
+
+.show-single-drink .drink-photo {
+    margin-top: 100px;
+    float: left;
+    display: block;
+    height: 100%;
+    width: 30%;
+}
+
+.show-single-drink .drink-photo img{
+height: 400px;
+width: 400px
+}
+
+.drink-info {
+    margin: 10% 8% 20px 8%;
+    width: 54%;
+    display: block;
+    float: left;
+}
+
+.drink-desc {
+    display: block;
+    float: left;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 1.4em;
+    line-height: 1.8;
+    letter-spacing: 0.25em;
+    margin: 30px 20px 30px 20px;
+    width: 100%;
+    height: 50%
+}
+
+.drink-info .drink-name {
+    float: left;
+    display: block;
+    width: 100%;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.drink-info .drink-author {
+    float: left;
+    display: block;
+    width: 100%;
+}
