@@ -7,4 +7,5 @@ public interface UserDAO {
     public User getUserByUserName(String userName);
 
     public void save(User theUser);
+
 }

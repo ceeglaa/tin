@@ -8,6 +8,8 @@ public interface DrinkDAO {
 
     public List<Drink> findAll();
 
+    public List<Drink> findByIds(List<Integer> ids);
+
     public Drink findById(int id);
 
     public void save(Drink theDrink);

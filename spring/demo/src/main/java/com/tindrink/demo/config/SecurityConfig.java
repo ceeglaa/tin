@@ -42,11 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		web.ignoring().antMatchers(HttpMethod.GET);
 
-		web.ignoring().antMatchers(HttpMethod.POST);
+		// web.ignoring().antMatchers(HttpMethod.POST);
 
-		web.ignoring().antMatchers(HttpMethod.PUT);
+		// web.ignoring().antMatchers(HttpMethod.PUT);
 
-		web.ignoring().antMatchers(HttpMethod.DELETE);
+		// web.ignoring().antMatchers(HttpMethod.DELETE);
 
 		web.ignoring().antMatchers(HttpMethod.OPTIONS);
 	 }

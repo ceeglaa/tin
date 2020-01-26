@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.tindrink.demo.dao.DrinkDAO;
 import com.tindrink.demo.dao.RoleDAO;
 import com.tindrink.demo.dao.UserDAO;
+import com.tindrink.demo.entity.Drink;
 import com.tindrink.demo.entity.Role;
 import com.tindrink.demo.entity.User;
 
@@ -26,12 +28,14 @@ public class UserAuthService implements UserDetailsService {
     private UserDAO userDao;
     private RoleDAO roleDao;
     private PasswordEncoder passwordEncoder;
+    private DrinkDAO drinkDao;
 
     @Autowired
-    public UserAuthService (UserDAO userDao, PasswordEncoder passwordEncoder, RoleDAO roleDao) {
+    public UserAuthService (UserDAO userDao, PasswordEncoder passwordEncoder, RoleDAO roleDao, DrinkDAO drinkDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.roleDao = roleDao;
+        this.drinkDao = drinkDao;
     }
     
 
@@ -67,10 +71,21 @@ public class UserAuthService implements UserDetailsService {
 	public void saveUser(User user) {
 
         Role role = roleDao.getRoleByName("USER");
+        Drink dr = drinkDao.findById(1);
+        System.out.println(dr);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setRole(role);
+        user.setRole(role);
+        user.addFavouriteDrink(dr);
 
 		userDao.save(user);
-	}
+    }
+    
+    @Transactional
+    public void addFavouriteDrink(String username, int drinkId) {
+        User user = userDao.getUserByUserName(username);
+        Drink drink = drinkDao.findById(drinkId);
+        user.addFavouriteDrink(drink);
+        userDao.save(user);
+    }
 
 }

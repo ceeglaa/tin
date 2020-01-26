@@ -1,7 +1,12 @@
 package com.tindrink.demo.rest;
 
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import javax.persistence.NoResultException;
+import javax.validation.Valid;
 
 import com.tindrink.demo.dao.RoleDAO;
 import com.tindrink.demo.entity.Role;
@@ -24,6 +29,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,13 +68,16 @@ public class JwtRestController {
 					new UsernamePasswordAuthenticationToken(jwtRequest.getUserName(), jwtRequest.getPassword()));
 					UserDetails userDetailst = (UserDetails) authentication.getPrincipal();
 					System.out.println(" USER DETAIL Z PRINCITATE ------>>>>>>" + userDetailst);
+		} catch (NoResultException e ) {
+			System.out.println("BRak uzytkownika");
+			return new ResponseEntity<JwtResponse>(new JwtResponse("Użytkownik nie istnieje"), HttpStatus.CONFLICT);
 		} catch (DisabledException e) {
 			throw new RuntimeException("User Inactive");
 		} catch (BadCredentialsException e) {
-			throw new RuntimeException("Invalid Credentials");
+			return new ResponseEntity<JwtResponse>(new JwtResponse("Błędny login lub hasło"), HttpStatus.CONFLICT);
 		} catch (AuthenticationException e) {
 			System.out.println(" CATCH EXCEPTION +++ ---- >>>" + e);
-			throw new RuntimeException(e);
+			return new ResponseEntity<JwtResponse>(new JwtResponse("Błędny login lub hasło"), HttpStatus.CONFLICT);
 		}
 
 		System.out.println(" JESTESMY ZA AUTHENTYKACJA");
@@ -93,8 +102,7 @@ public class JwtRestController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> signup(@RequestBody User user) {
-
+	public ResponseEntity<String> signup(@Valid @RequestBody User user) {
 		try{
 			userAuthService.saveUser(user);
 			return new ResponseEntity<String>("User " + user.getUserName() + " został zarejestrowny", HttpStatus.OK);

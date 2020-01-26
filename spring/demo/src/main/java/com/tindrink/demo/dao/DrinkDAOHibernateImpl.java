@@ -77,4 +77,18 @@ public class DrinkDAOHibernateImpl implements DrinkDAO {
 
         return drink;
     }
+
+    @Override
+    public List<Drink> findByIds(List<Integer> ids) {
+
+        Session currentSession = entityManager.unwrap(Session.class);
+
+        Query<Drink> theQuery = currentSession.createQuery("DELETE FROM Drink WHERE id IN :ids", Drink.class);
+
+        theQuery.setParameter("ids", ids);
+
+        List<Drink> drinks = theQuery.getResultList();
+
+        return drinks;
+    }
 }

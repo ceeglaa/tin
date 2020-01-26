@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.tindrink.demo.exception.JwtTokenMissingException;
 import com.tindrink.demo.service.UserAuthService;
 import com.tindrink.demo.util.JwtUtil;
 import com.tindrink.demo.vo.UserVo;
@@ -38,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         System.out.println(" HEADER --->>>> " + header);
 
         if( header == null || !header.startsWith("Bearer")) {
-            throw new RuntimeException("No JWT token found in the request headers");
+            throw new JwtTokenMissingException("No JWT token found in the request headers");
         }
 
         String token = header.substring(7);

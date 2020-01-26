@@ -1,5 +1,6 @@
 package com.tindrink.demo.rest;
 
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +33,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tindrink.demo.dao.AmountDAO;
 import com.tindrink.demo.dao.DrinkDAO;
 import com.tindrink.demo.dao.IngredientDAO;
+import com.tindrink.demo.dao.UserDAO;
 import com.tindrink.demo.entity.Amount;
 import com.tindrink.demo.entity.Drink;
 import com.tindrink.demo.entity.Ingredient;
+import com.tindrink.demo.entity.User;
 import com.tindrink.demo.entity.Views;
 
 @CrossOrigin
@@ -43,18 +48,32 @@ public class DrinkRestController {
     private DrinkDAO drinkDao;
     private IngredientDAO ingredientDao;
     private AmountDAO amountDao;
+    private UserDAO userDao;
 
     @Autowired
-    public DrinkRestController(DrinkDAO drinkDao, IngredientDAO ingredientDao, AmountDAO amountDao){
+    public DrinkRestController(DrinkDAO drinkDao, IngredientDAO ingredientDao, AmountDAO amountDao, UserDAO userDao){
         this.drinkDao = drinkDao;
         this.ingredientDao = ingredientDao;
         this.amountDao = amountDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/drinks")
     @JsonView(Views.List.class)
     public List<Drink> getDrinkList() {
         return drinkDao.findAll();
+    }
+
+    @GetMapping("/drinks/user/{username}")
+    @JsonView(Views.List.class)
+    public List<Drink> getDrinkList(@PathVariable String username) {
+        User user = userDao.getUserByUserName(username);
+        List<Integer> ids = new ArrayList<>();
+
+        user.getFavouriteDrinks().forEach((Drink drink) -> {
+            ids.add(new Integer(drink.getId()));
+          });
+        return drinkDao.findByIds(ids);
     }
 
     @GetMapping("/drinks/{drinkId}")
