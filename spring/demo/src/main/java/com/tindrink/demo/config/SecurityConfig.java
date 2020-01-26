@@ -40,14 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/signin", "/signup", "/role");
 
-		// web.ignoring().antMatchers(HttpMethod.GET);
+		web.ignoring().antMatchers(HttpMethod.GET);
 
-		// web.ignoring().antMatchers(HttpMethod.POST);
+		web.ignoring().antMatchers(HttpMethod.POST);
 
-		// web.ignoring().antMatchers(HttpMethod.PUT);
+		web.ignoring().antMatchers(HttpMethod.PUT);
 
-		// web.ignoring().antMatchers(HttpMethod.DELETE);
-	}
+		web.ignoring().antMatchers(HttpMethod.DELETE);
+
+		web.ignoring().antMatchers(HttpMethod.OPTIONS);
+	 }
 
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {

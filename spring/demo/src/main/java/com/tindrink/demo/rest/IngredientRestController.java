@@ -62,7 +62,7 @@ public class IngredientRestController {
 		return ingredientDAO.findById(ingredientId);
     }
     
-    // @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/ingredients")
     public ResponseEntity<String> createIngredient (@Valid @RequestBody Ingredient ingredient) {
         
